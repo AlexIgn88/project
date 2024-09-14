@@ -12,7 +12,7 @@ interface locationType {
     lng: number;
 }
 
-interface restaurantMenuType {
+export interface restaurantMenuType {
     id: string;
     name: string;
     price: number;
@@ -52,4 +52,8 @@ export interface normalizedReviewsType {
 export interface normalizedUsersType {
     id: string;
     name: string;
+}
+
+export interface restaurantsProps {
+    restaurants: Array<restaurantType>;
 }
