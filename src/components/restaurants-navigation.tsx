@@ -1,24 +1,12 @@
-import { useCallback } from 'react';
-import {restaurantType} from '../types/fixturesTypes';
+import {RestaurantsProps} from '../types/fixturesTypes';
 
-interface restaurantsNavigationProps {
-    restaurants: Array<restaurantType>;
-}
-
-const RestaurantsNavigation = (props: restaurantsNavigationProps) => {
-
-    const handlerPropsOnRestaurantChange = useCallback((id: string) => {
-        console.log(id)
-    }, []);
-
+const RestaurantsNavigation = (props: RestaurantsProps) => {
     return (
         <div>
             {props.restaurants.map(restaurant => (
                 <button
                 key={restaurant.id}
-                onClick={() => {
-                    handlerPropsOnRestaurantChange(restaurant.id)
-                }}
+                onClick={() =>  props.onRestaurantChange(restaurant.id)}
                 >
                     {restaurant.name}
                     </button>

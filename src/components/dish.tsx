@@ -1,7 +1,7 @@
-import {normalizedDishesType} from '../types/fixturesTypes';
+import {RestaurantMenuType} from '../types/fixturesTypes';
 
 interface dishProps {
-    dish: normalizedDishesType;
+    dish: RestaurantMenuType;
 }
 
 const Dish = (props: dishProps) => {

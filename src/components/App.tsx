@@ -1,10 +1,9 @@
 import React,{FC, useCallback, useState} from 'react';
 // import './App.css';
 import Restaurants from './restaurants';
-import {restaurantType} from '../types/fixturesTypes';
-import {restaurantsProps} from '../types/fixturesTypes'
+import {RestaurantsProps} from '../types/fixturesTypes'
 
-const App = ({restaurants}: restaurantsProps) => {
+const App = ({restaurants}: RestaurantsProps) => {
 
   // const [value, setValue] = useState({value:0});
 

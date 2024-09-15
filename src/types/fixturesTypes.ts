@@ -1,59 +1,60 @@
-export interface restaurantType {
+export interface RestaurantType {
     id: string;
     name: string;
-    location: locationType;
+    location: LocationType;
     image: string;
-    menu: Array<restaurantMenuType>;
-    reviews: Array<restaurantReviewsType>;
+    menu: Array<RestaurantMenuType>;
+    reviews: Array<RestaurantReviewsType>;
 }
 
-interface locationType {
+interface LocationType {
     lat: number;
     lng: number;
 }
 
-export interface restaurantMenuType {
+export interface RestaurantMenuType {
     id: string;
     name: string;
     price: number;
     ingredients: Array<string>;
 }
 
-interface restaurantReviewsType {
+interface RestaurantReviewsType {
     id: string;
     user: string;
     text: string;
     rating: number;
 }
 
-export interface normalizedRestaurantsType {
+export interface NormalizedRestaurantsType {
     id: string;
     name: string;
-    location: locationType;
+    location: LocationType;
     image: string;
     menu: Array<string>;
     reviews: Array<string>;
 }
 
-export interface normalizedDishesType {
+export interface NormalizedDishesType {
     id: string;
     name: string;
     price: number;
     ingredients: Array<string>;
 }
 
-export interface normalizedReviewsType {
+export interface NormalizedReviewsType {
     id: string;
     userId: string;
     text: string;
     rating: number;
 }
 
-export interface normalizedUsersType {
+export interface NormalizedUsersType {
     id: string;
     name: string;
 }
 
-export interface restaurantsProps {
-    restaurants: Array<restaurantType>;
+export interface RestaurantsProps {
+    restaurants: Array<RestaurantType>;
+    onRestaurantChange?: any;
 }

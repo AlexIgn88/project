@@ -1,12 +1,12 @@
 import {
-  restaurantType,
-  normalizedRestaurantsType,
-  normalizedDishesType,
-  normalizedReviewsType,
-  normalizedUsersType
+  RestaurantType,
+  NormalizedRestaurantsType,
+  NormalizedDishesType,
+  NormalizedReviewsType,
+  NormalizedUsersType
 } from '../src/types/fixturesTypes';
 
-const restaurants: Array<restaurantType> = [
+const restaurants: Array<RestaurantType> = [
   {
     id: 'a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2',
     name: 'Dishoom',
@@ -173,7 +173,7 @@ const restaurants: Array<restaurantType> = [
   },
 ]
 
-const normalizedRestaurants: Array<normalizedRestaurantsType> = [
+const normalizedRestaurants: Array<NormalizedRestaurantsType> = [
   {
     id: 'a757a0e9-03c1-4a2a-b384-8ac21dbe2fb2',
     name: 'Dishoom',
@@ -247,7 +247,7 @@ const normalizedRestaurants: Array<normalizedRestaurantsType> = [
   },
 ]
 
-const normalizedDishes: Array<normalizedDishesType> = [
+const normalizedDishes: Array<NormalizedDishesType> = [
   {
     id: 'd75f762a-eadd-49be-8918-ed0daa8dd024',
     name: 'Chicken tikka masala',
@@ -310,7 +310,7 @@ const normalizedDishes: Array<normalizedDishesType> = [
   },
 ]
 
-const normalizedReviews: Array<normalizedReviewsType> = [
+const normalizedReviews: Array<NormalizedReviewsType> = [
   {
     id: '13b642d7-5e86-4717-a466-0640a1dee076',
     userId: 'a304959a-76c0-4b34-954a-b38dbf310360',
@@ -368,7 +368,7 @@ const normalizedReviews: Array<normalizedReviewsType> = [
   },
 ]
 
-const normalizedUsers: Array<normalizedUsersType> = [
+const normalizedUsers: Array<NormalizedUsersType> = [
   {
     id: 'a304959a-76c0-4b34-954a-b38dbf310360',
     name: 'Antony',
