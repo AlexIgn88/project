@@ -5,15 +5,19 @@ interface ReviewProps {
     review: RestaurantReviewsType;
 }
 
-const Review = (props: ReviewProps) => {
+const Review = ({review: {user, rating, text}}: ReviewProps) => {
     return (
         <div>
             <Card 
-              title={props.review.user}
+              title={user}
             >
-                    <Rate value={props.review.rating}/>
+                    <Rate 
+                    value={rating}
+                    disabled
+                    allowHalf
+                    />
                     <div></div>
-                    {props.review.text}
+                    {text}
             </Card>
         </div>
     )

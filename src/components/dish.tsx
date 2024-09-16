@@ -6,14 +6,14 @@ interface dishProps {
     dish: RestaurantMenuType;
 }
 
-const Dish = (props: dishProps) => {
+const Dish = ({dish: {name, price}}: dishProps) => {
     const { amount, increase, decrease }: AmountHook = useAmount();
     return (
         <Card
-        title={props.dish.name}
+        title={name}
         >
             <Typography.Paragraph>
-                Price: {props.dish.price}
+                Price: {price}
             </Typography.Paragraph>
             <div>
                 {amount}&#160;

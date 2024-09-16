@@ -6,7 +6,8 @@ export interface RestaurantsProps {
 }
 
 export interface ActiveRestaurantProps {
-    restaurant: RestaurantType | undefined;
+    restaurant: RestaurantType;
 }
 
 export type ReviewsProps = Pick<RestaurantType, 'reviews'>;
+export type DishesProps = Pick<RestaurantType, 'menu'>;

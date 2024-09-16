@@ -1,23 +1,12 @@
-import Menu from './menu';
+import Dishes from './dishes';
 import Reviews from '../components/reviews';
 import {ActiveRestaurantProps} from '../types/PropsTypes';
-import {RestaurantReviewsType} from '../types/fixturesTypes';
-import { Rate, Flex, Typography  } from "antd";
-import { useMemo } from 'react';
+import { Flex, Typography  } from "antd";
+import {AverageRating} from '../components/average-rating';
 
 const Restaurant = (props: ActiveRestaurantProps) => {
-    const restaurantReviewsArray: Array<RestaurantReviewsType> = props?.restaurant?.reviews || [];
+    const {restaurant: {name, menu, reviews}} = props;
 
-    const result: number = useMemo(() => {
-        return restaurantReviewsArray.reduce(
-            (sum, current) => sum + current?.rating, 0)
-    }, [restaurantReviewsArray]);
-
-    const restaurantRate: number = useMemo(() => {
-        return restaurantReviewsArray.length > 0 
-        ? Math.floor(result / restaurantReviewsArray.length)
-        : 0}, [restaurantReviewsArray]); 
-    
     return (
         <>
         <Flex 
@@ -25,16 +14,16 @@ const Restaurant = (props: ActiveRestaurantProps) => {
         vertical
         align='center'
         >
-            <Typography.Title>{props?.restaurant?.name}</Typography.Title>
-            <Rate value={restaurantRate}/>
+            <Typography.Title>{name}</Typography.Title>
+            <AverageRating reviews={reviews}/>
         </Flex>
         <Typography.Title
         style={{ textAlign: 'center' }}
         >
             Menu
         </Typography.Title>
-        <Menu 
-        restaurant={props?.restaurant} 
+        <Dishes 
+        menu={menu} 
         />
         <Typography.Title
         style={{ textAlign: 'center' }}
@@ -42,7 +31,7 @@ const Restaurant = (props: ActiveRestaurantProps) => {
         Reviews
         </Typography.Title>
         <Reviews 
-        reviews={props?.restaurant?.reviews}
+        reviews={reviews}
         />
         </>
     )

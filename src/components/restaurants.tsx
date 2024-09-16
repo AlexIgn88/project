@@ -26,10 +26,10 @@ const Restaurants = (props: RestaurantsProps) => {
             restaurants={props.restaurants}
             onRestaurantChange={handlerPropsOnRestaurantChange}
             />
-            {activeRestaurantId && (
+            {activeRestaurant && (
                 <Restaurant 
             restaurant={activeRestaurant}
-            />
+                />
             )}
         </div>
     )

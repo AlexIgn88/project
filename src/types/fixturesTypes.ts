@@ -4,7 +4,7 @@ export interface RestaurantType {
     location: LocationType;
     image: string;
     menu: Array<RestaurantMenuType>;
-    reviews: Array<RestaurantReviewsType> | undefined;
+    reviews: Array<RestaurantReviewsType>;
 }
 
 interface LocationType {
