@@ -4,7 +4,7 @@ export interface RestaurantType {
     location: LocationType;
     image: string;
     menu: Array<RestaurantMenuType>;
-    reviews: Array<RestaurantReviewsType>;
+    reviews: Array<RestaurantReviewsType> | undefined;
 }
 
 interface LocationType {
@@ -19,7 +19,7 @@ export interface RestaurantMenuType {
     ingredients: Array<string>;
 }
 
-interface RestaurantReviewsType {
+export interface RestaurantReviewsType {
     id: string;
     user: string;
     text: string;
@@ -52,9 +52,4 @@ export interface NormalizedReviewsType {
 export interface NormalizedUsersType {
     id: string;
     name: string;
-}
-
-export interface RestaurantsProps {
-    restaurants: Array<RestaurantType>;
-    onRestaurantChange?: any;
 }

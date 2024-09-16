@@ -1,4 +1,4 @@
-import {RestaurantsProps} from '../types/fixturesTypes';
+import {RestaurantsProps} from '../types/PropsTypes';
 
 const RestaurantsNavigation = (props: RestaurantsProps) => {
     return (

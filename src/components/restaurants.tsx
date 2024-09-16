@@ -1,16 +1,14 @@
 import RestaurantsNavigation from './restaurants-navigation';
-import Menu from './menu';
-import {RestaurantsProps} from '../types/fixturesTypes';
+import {RestaurantsProps} from '../types/PropsTypes';
 import { useCallback, useMemo, useState } from 'react';
+import Restaurant from '../components/restaurant';
 
 const Restaurants = (props: RestaurantsProps) => {
 
     const [
         activeRestaurantId, 
         setActiveRestaurantId
-    ] = useState(props.restaurants[0].id);
-
-    // console.log('id=',activeRestaurantId);
+    ] = useState('');
 
     const activeRestaurant = useMemo(() => {
         return props.restaurants.find(
@@ -28,7 +26,11 @@ const Restaurants = (props: RestaurantsProps) => {
             restaurants={props.restaurants}
             onRestaurantChange={handlerPropsOnRestaurantChange}
             />
-            <Menu restaurant={activeRestaurant} />
+            {activeRestaurantId && (
+                <Restaurant 
+            restaurant={activeRestaurant}
+            />
+            )}
         </div>
     )
 }

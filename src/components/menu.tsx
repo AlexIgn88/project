@@ -1,11 +1,7 @@
 import Dish from '../components/dish';
-import {RestaurantType} from '../types/fixturesTypes'
+import {ActiveRestaurantProps} from '../types/PropsTypes';
 
-interface MenuProps {
-    restaurant: RestaurantType | undefined;
-}
-
-const Menu = (props: MenuProps) => {
+const Menu = (props: ActiveRestaurantProps) => {
     return (
         <div>
             {props?.restaurant?.menu.map(dish => (
