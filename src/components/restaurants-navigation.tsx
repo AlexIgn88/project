@@ -1,17 +1,18 @@
 import {RestaurantsProps} from '../types/PropsTypes';
+import { Flex, Button } from "antd";
 
 const RestaurantsNavigation = (props: RestaurantsProps) => {
     return (
-        <div>
+        <Flex justify='center'>
             {props.restaurants.map(restaurant => (
-                <button
+                <Button
                 key={restaurant.id}
                 onClick={() =>  props.onRestaurantChange(restaurant.id)}
                 >
                     {restaurant.name}
-                    </button>
+                </Button>
             ))}
-        </div>
+        </Flex>
     )
 }
 

@@ -1,5 +1,5 @@
-import React,{FC, useCallback, useState} from 'react';
-// import './App.css';
+import React from 'react';
+import './App.css';
 import Restaurants from './restaurants';
 import {RestaurantsProps} from '../types/PropsTypes';
 

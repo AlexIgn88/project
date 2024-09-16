@@ -1,5 +1,5 @@
 import {RestaurantMenuType} from '../types/fixturesTypes';
-import { Button } from 'antd';
+import { Button, Card, Typography } from 'antd';
 import {useAmount, AmountHook} from '../custom-hooks/use-amount';
 
 interface dishProps {
@@ -9,11 +9,14 @@ interface dishProps {
 const Dish = (props: dishProps) => {
     const { amount, increase, decrease }: AmountHook = useAmount();
     return (
-        <div>
-            <p>{props.dish.name}</p>
-            <p>{props.dish.price}</p>
+        <Card
+        title={props.dish.name}
+        >
+            <Typography.Paragraph>
+                Price: {props.dish.price}
+            </Typography.Paragraph>
             <div>
-                {amount}
+                {amount}&#160;
                 <Button 
                 onClick={() => decrease()}
                 type='primary'
@@ -24,7 +27,7 @@ const Dish = (props: dishProps) => {
                 type='primary'
                 >+</Button>
             </div>
-        </div>
+        </Card>
     )
 }
 
