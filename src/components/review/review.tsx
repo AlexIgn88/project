@@ -1,4 +1,4 @@
-import {RestaurantReviewsType} from '../types/fixturesTypes';
+import {RestaurantReviewsType} from '../../types/fixturesTypes';
 import { Card, Rate } from "antd";
 
 interface ReviewProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Restaurants from './restaurants';
-import { restaurants } from '../fixtures'; 
+import { restaurants } from '../../fixtures'; 
 
 describe('Restaurant', () => {
   it('should render a div with data-testid="RESTAURANTS"', () => {

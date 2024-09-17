@@ -1,4 +1,4 @@
-import {RestaurantsProps} from '../types/PropsTypes';
+import {RestaurantsProps} from '../../types/PropsTypes';
 import { Flex, Button } from "antd";
 
 const RestaurantsNavigation = ({

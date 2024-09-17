@@ -1,5 +1,5 @@
-import Dish from './dish';
-import {DishesProps} from '../types/PropsTypes';
+import Dish from '../dish';
+import {DishesProps} from '../../types/PropsTypes';
 
 const Dishes = ({menu}: DishesProps) => {
     return (

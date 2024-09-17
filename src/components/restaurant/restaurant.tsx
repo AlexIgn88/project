@@ -1,8 +1,8 @@
-import Dishes from './dishes';
-import Reviews from '../components/reviews';
-import {ActiveRestaurantProps} from '../types/PropsTypes';
+import Dishes from '../dishes';
+import Reviews from '../../components/reviews';
+import {ActiveRestaurantProps} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
-import {AverageRating} from '../components/average-rating';
+import {AverageRating} from '../../components/average-rating';
 
 const Restaurant = (props: ActiveRestaurantProps) => {
     const {restaurant: {name, menu, reviews}} = props;

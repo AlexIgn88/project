@@ -1,7 +1,7 @@
-import RestaurantsNavigation from './restaurants-navigation';
-import {RestaurantsProps} from '../types/PropsTypes';
+import RestaurantsNavigation from '../restaurants-navigation';
+import {RestaurantsProps} from '../../types/PropsTypes';
 import { useCallback, useMemo, useState } from 'react';
-import Restaurant from '../components/restaurant';
+import Restaurant from '../restaurant';
 
 const Restaurants = (props: RestaurantsProps) => {
 

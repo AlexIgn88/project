@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Reviews from './reviews';
-import Review from './review';
-import { restaurants } from '../fixtures'; 
+import Reviews from '.';
+// import Review from '../review';
+import { restaurants } from '../../fixtures'; 
 
 const reviews = restaurants[0].reviews;
 

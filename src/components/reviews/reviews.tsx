@@ -1,5 +1,5 @@
-import {ReviewsProps} from '../types/PropsTypes';
-import Review from '../components/review';
+import {ReviewsProps} from '../../types/PropsTypes';
+import Review from '../review/review';
 
 const Reviews = ({reviews}: ReviewsProps) => {
     return (

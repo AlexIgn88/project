@@ -1,6 +1,6 @@
-import {RestaurantMenuType} from '../types/fixturesTypes';
+import {RestaurantMenuType} from '../../types/fixturesTypes';
 import { Button, Card, Typography } from 'antd';
-import counter from '../decorators/counter';
+import counter from '../../decorators/counter';
 
 interface dishProps {
     dish: RestaurantMenuType;

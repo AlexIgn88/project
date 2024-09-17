@@ -1,5 +1,5 @@
 import { Rate } from "antd";
-import {ReviewsProps} from '../types/PropsTypes';
+import {ReviewsProps} from '../../types/PropsTypes';
 import { useMemo } from 'react';
 
 export const AverageRating = ({reviews}:ReviewsProps) => {
