@@ -14,8 +14,4 @@ const Dishes = ({menu}: DishesProps) => {
     )
 }
 
-Dishes.defaultProps = {
-    menu: [],
-}
-
 export default Dishes;

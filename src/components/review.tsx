@@ -10,6 +10,7 @@ const Review = ({review: {user, rating, text}}: ReviewProps) => {
         <div>
             <Card 
               title={user}
+              data-testid="REVIEW"
             >
                     <Rate 
                     value={rating}

@@ -6,11 +6,14 @@ const RestaurantsNavigation = ({
     onRestaurantChange
 }: Required<RestaurantsProps>) => {
     return (
-        <Flex justify='center'>
+        <Flex 
+        justify='center'
+        >
             {restaurants.map(restaurant => (
                 <Button
                 key={restaurant.id}
                 onClick={() => onRestaurantChange(restaurant.id)}
+                data-testid="RESTAURANT_NAVIGATION"
                 >
                     {restaurant.name}
                 </Button>

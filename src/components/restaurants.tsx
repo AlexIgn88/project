@@ -22,7 +22,8 @@ const Restaurants = (props: RestaurantsProps) => {
     }, []);
 
     return (
-        <div>
+        // <div data-automation-id="RESTAURANTS">
+        <div data-testid="RESTAURANTS">
             <RestaurantsNavigation 
             restaurants={props.restaurants}
             onRestaurantChange={handlerPropsOnRestaurantChange}
