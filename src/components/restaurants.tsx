@@ -16,7 +16,8 @@ const Restaurants = (props: RestaurantsProps) => {
         )
     },[activeRestaurantId, props.restaurants]);
 
-    const handlerPropsOnRestaurantChange = useCallback((id: string) => {
+    type HandlerPropsOnRestaurantChange = (id: string) => void;
+    const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
         setActiveRestaurantId(id);
     }, []);
 

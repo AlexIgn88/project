@@ -1,13 +1,22 @@
 import {RestaurantMenuType} from '../types/fixturesTypes';
 import { Button, Card, Typography } from 'antd';
-import {useAmount, AmountHook} from '../custom-hooks/use-amount';
+import counter from '../decorators/counter';
 
 interface dishProps {
     dish: RestaurantMenuType;
+    amount: number;
+    increase: () => void;
+    decrease: () => void;
 }
 
-const Dish = ({dish: {name, price}}: dishProps) => {
-    const { amount, increase, decrease }: AmountHook = useAmount();
+const Dish = (props: dishProps) => {
+    const {
+        dish: {name, price},
+        amount,
+        increase,
+        decrease
+    } = props;
+
     return (
         <Card
         title={name}
@@ -21,14 +30,18 @@ const Dish = ({dish: {name, price}}: dishProps) => {
                 onClick={() => decrease()}
                 type='primary'
                 disabled={amount <= 0}
-                >-</Button>
+                >
+                -
+                </Button>
                 <Button 
                 onClick={() => increase()}
                 type='primary'
-                >+</Button>
+                >
+                +
+                </Button>
             </div>
         </Card>
     )
 }
 
-export default Dish;
+export default counter(Dish);

@@ -2,7 +2,7 @@ import {RestaurantType} from './fixturesTypes';
 
 export interface RestaurantsProps {
     restaurants: Array<RestaurantType>;
-    onRestaurantChange?: any;
+    onRestaurantChange?: (id: string) => void;
 }
 
 export interface ActiveRestaurantProps {
