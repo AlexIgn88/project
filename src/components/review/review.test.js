@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Reviews from './index';
+import Reviews from '../reviews';
 import { restaurants } from '../../fixtures'; 
 
 const reviews = restaurants[0].reviews;
 
-describe('Reviews', () => {
-  it('should render Reviews component', () => {
+describe('Review', () => {
+  it('should render all reviews', () => {
     render(<Reviews reviews={reviews} />);
-    expect(screen.getByTestId('REVIEWS')).toBeInTheDocument();
+    expect(screen.getAllByTestId('REVIEW')).toHaveLength(reviews.length); 
   });
 });

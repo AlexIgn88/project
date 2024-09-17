@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Dishes from '../dishes/dishes';
-import Dish from '../dish';
+import Dishes from '../dishes';
+import Dish from './dish';
 import { restaurants } from '../../fixtures'; 
 
 const dishes = restaurants[0].menu;
