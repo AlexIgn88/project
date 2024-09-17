@@ -1,10 +1,10 @@
 import Dish from './dish';
 import {DishesProps} from '../types/PropsTypes';
 
-const Dishes = (props: DishesProps) => {
+const Dishes = ({menu}: DishesProps) => {
     return (
         <div>
-            {props?.menu?.map(dish => (
+            {menu?.map(dish => (
                 <Dish 
                 key={dish.id} 
                 dish={dish}
@@ -12,6 +12,10 @@ const Dishes = (props: DishesProps) => {
             ))}
         </div>
     )
+}
+
+Dishes.defaultProps = {
+    menu: [],
 }
 
 export default Dishes;
