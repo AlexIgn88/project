@@ -3,6 +3,7 @@ import Reviews from '../../components/reviews';
 import {ActiveRestaurantProps} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
 import {AverageRating} from '../../components/average-rating';
+import style from './restaurant.module.css';
 
 const Restaurant = (props: ActiveRestaurantProps) => {
     const {restaurant: {name, menu, reviews}} = props;
@@ -13,25 +14,21 @@ const Restaurant = (props: ActiveRestaurantProps) => {
         justify='center'
         vertical
         align='center'
+        className={style.restaurant__title}
         >
-            <Typography.Title>{name}</Typography.Title>
+            <Typography.Title 
+            className={style.restaurant__name}
+            style={{ color: 'white' }}
+            >
+            {name}
+            </Typography.Title>
             <AverageRating reviews={reviews}/>
         </Flex>
-        <Typography.Title
-        style={{ textAlign: 'center' }}
-        >
-            Menu
-        </Typography.Title>
-        <Dishes 
-        menu={menu} 
-        />
-        <Typography.Title
-        style={{ textAlign: 'center' }}
-        >
-        Reviews
-        </Typography.Title>
         <Reviews 
         reviews={reviews}
+        />
+        <Dishes 
+        menu={menu} 
         />
         </>
     )

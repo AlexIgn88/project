@@ -1,15 +1,33 @@
 import React from 'react';
-
 import styles from './app.module.css'; 
 import Restaurants from '../restaurants/restaurants';
-import {RestaurantsProps} from '../../types/PropsTypes';
+import Header from '../header';
+import {store} from '../../store';
+import {Provider} from 'react-redux';
 
-const App = ({restaurants}: RestaurantsProps) => {
+  // only for experimenting
+// declare global {
+//   interface Window {
+//     store: any; //  или конкретный тип хранилища
+//   }
+// }
+// window.store = store; 
 
+  const App = () => {
   return (
-    <div className={styles.app}>
-      <Restaurants restaurants={restaurants}/>
-    </div>
+    <Provider store={store}>
+      <div
+      className={styles.app}
+      >
+                      <Header
+                      // lang={this.state.lang}
+                      // setLang={this.handleLangChange}
+                      />
+
+                      <Restaurants
+                      />
+      </div>
+    </Provider>
   );
 }
 

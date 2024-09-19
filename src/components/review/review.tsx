@@ -1,5 +1,6 @@
 import {RestaurantReviewsType} from '../../types/fixturesTypes';
 import { Card, Rate } from "antd";
+import styles from './review.module.css'; 
 
 interface ReviewProps {
     review: RestaurantReviewsType;
@@ -7,7 +8,7 @@ interface ReviewProps {
 
 const Review = ({review: {user, rating, text}}: ReviewProps) => {
     return (
-        <div>
+        <div className={styles.review}>
             <Card 
               title={user}
               data-testid="REVIEW"

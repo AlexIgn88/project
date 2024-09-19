@@ -2,8 +2,10 @@ import RestaurantsNavigation from '../restaurants-navigation';
 import {RestaurantsProps} from '../../types/PropsTypes';
 import { useCallback, useMemo, useState } from 'react';
 import Restaurant from '../restaurant';
+import {connect} from 'react-redux';
+import {State} from '../../store/reducers';
 
-const Restaurants = (props: RestaurantsProps) => {
+const Restaurants = ({restaurants}: RestaurantsProps) => {
 
     const [
         activeRestaurantId, 
@@ -11,10 +13,10 @@ const Restaurants = (props: RestaurantsProps) => {
     ] = useState('');
 
     const activeRestaurant = useMemo(() => {
-        return props.restaurants.find(
+        return restaurants.find(
             restaurant => restaurant.id === activeRestaurantId
         )
-    },[activeRestaurantId, props.restaurants]);
+    },[activeRestaurantId, restaurants]);
 
     type HandlerPropsOnRestaurantChange = (id: string) => void;
     const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
@@ -22,10 +24,9 @@ const Restaurants = (props: RestaurantsProps) => {
     }, []);
 
     return (
-        // <div data-automation-id="RESTAURANTS">
         <div data-testid="RESTAURANTS">
             <RestaurantsNavigation 
-            restaurants={props.restaurants}
+            restaurants={restaurants}
             onRestaurantChange={handlerPropsOnRestaurantChange}
             />
             {activeRestaurant && (
@@ -37,4 +38,10 @@ const Restaurants = (props: RestaurantsProps) => {
     )
 }
 
-export default Restaurants;
+const mapStateToProps = (state: State) => ({
+    restaurants: state.restaurants,
+  })
+
+export default connect(
+    mapStateToProps
+  )(Restaurants);

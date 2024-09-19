@@ -1,6 +1,7 @@
 import { Rate } from "antd";
 import {ReviewsProps} from '../../types/PropsTypes';
 import { useMemo } from 'react';
+import style from './average-rating.module.css';
 
 export const AverageRating = ({reviews}:ReviewsProps) => {
     const rateResult: number = useMemo(() => {
@@ -17,6 +18,7 @@ export const AverageRating = ({reviews}:ReviewsProps) => {
         value={restaurantRate}
         disabled
         allowHalf
+        className={style.stars}
         />
     )
 }

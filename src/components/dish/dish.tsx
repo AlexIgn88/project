@@ -1,6 +1,13 @@
 import {RestaurantMenuType} from '../../types/fixturesTypes';
 import { Button, Card, Typography } from 'antd';
 import counter from '../../decorators/counter';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
+import {addToCart, removeFromCart} from '../../store/action-creators';
+// import {cartState}  from '../../store/reducers/cart';
+import {State}  from '../../store/reducers';
+import {AppDispatch}  from '../../store';
+// import {ActionCartReducer} from '../../types/reducerTypes';
 
 interface dishProps {
     dish: RestaurantMenuType;
@@ -11,11 +18,17 @@ interface dishProps {
 
 const Dish = (props: dishProps) => {
     const {
-        dish: {name, price},
-        amount,
-        increase,
-        decrease
+        dish: {id, name, price},
+        // amount,
+        // increase,
+        // decrease
     } = props;
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    const increase = useCallback(() => dispatch(addToCart(id)),[dispatch, id]);
+    const decrease = useCallback(() => dispatch(removeFromCart(id)),[dispatch, id]);
+    const amount: number = useSelector((state: State) => state.cart[id]) || 0;
 
     return (
         <Card
@@ -31,7 +44,7 @@ const Dish = (props: dishProps) => {
                 {amount}
                 </div>
                 <Button 
-                onClick={() => decrease()}
+                onClick={decrease}
                 type='primary'
                 // disabled={amount <= 0}
                 data-testid="DECREASE"
@@ -39,7 +52,7 @@ const Dish = (props: dishProps) => {
                 -
                 </Button>
                 <Button 
-                onClick={() => increase()}
+                onClick={increase}
                 type='primary'
                 data-testid="INCREASE"
                 >

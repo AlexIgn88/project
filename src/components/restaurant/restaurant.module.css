@@ -1,0 +1,7 @@
+.restaurant__title {
+    padding-bottom: 30px;
+    background-image: url('../../../public/background.jpg');
+    height: 141px;
+    background-size: cover; 
+    background-position: center; 
+}
