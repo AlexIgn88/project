@@ -5,11 +5,11 @@ import './cart-badge.css';
 // import {selectCart} from '../../store/selectors';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import {useSelector} from 'react-redux';
-import {cartState}  from '../../store/reducers/cart';
+import {CartState}  from '../../store/reducers/cart';
 
 export default function CartBadge() {
 const amount = useSelector(
-    ({cart}: cartState) => Object
+    ({cart}: CartState) => Object
     .values(cart)
     .reduce((acc: number, count: number) => acc + count, 0)
 );

@@ -9,6 +9,7 @@ import {
     FETCH_USERS,
     INCREMENT,
     REMOVE_FROM_CART,
+    CLEAR_THE_CART,
     SEND_ORDER,
     START,
     SUCCESS,
@@ -48,6 +49,12 @@ import {ActionCartReducer} from '../../types/reducerTypes';
       payload: {
         id: dishId,
       },
+    }
+  }
+
+  export const clearTheCart = (): Omit<ActionCartReducer, 'payload'> => {
+    return {
+      type: CLEAR_THE_CART,
     }
   }
   

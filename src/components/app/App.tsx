@@ -6,12 +6,12 @@ import {store} from '../../store';
 import {Provider} from 'react-redux';
 
   // only for experimenting
-// declare global {
-//   interface Window {
-//     store: any; //  или конкретный тип хранилища
-//   }
-// }
-// window.store = store; 
+declare global {
+  interface Window {
+    store: any; //  или конкретный тип хранилища
+  }
+}
+window.store = store; 
 
   const App = () => {
   return (

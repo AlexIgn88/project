@@ -1,12 +1,12 @@
 import {ActionCartReducer} from '../../types/reducerTypes';
-import {ADD_TO_CART, REMOVE_FROM_CART} from '../common';
+import {ADD_TO_CART, REMOVE_FROM_CART, CLEAR_THE_CART} from '../common';
 
-export interface cartState {
+export interface CartState {
     [key: string]: number;
 }
 
 export const cartReducer  = (
-    cartState: cartState | any = {}, 
+    cartState: CartState | any = {}, 
     action: ActionCartReducer
 ) => {
     switch(action.type){
@@ -26,6 +26,9 @@ export const cartReducer  = (
               ...cartState,
               [id]: cartState[id] - 1,
             }
+          }
+          case CLEAR_THE_CART: {
+              return {}
           }
         default: {
           return cartState

@@ -4,6 +4,7 @@ import {ActiveRestaurantProps} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
 import {AverageRating} from '../../components/average-rating';
 import style from './restaurant.module.css';
+import Order from '../order';
 
 const Restaurant = (props: ActiveRestaurantProps) => {
     const {restaurant: {name, menu, reviews}} = props;
@@ -24,6 +25,7 @@ const Restaurant = (props: ActiveRestaurantProps) => {
             </Typography.Title>
             <AverageRating reviews={reviews}/>
         </Flex>
+        <Order />
         <Reviews 
         reviews={reviews}
         />
