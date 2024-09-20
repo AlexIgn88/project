@@ -1,11 +1,11 @@
 import RestaurantsNavigation from '../restaurants-navigation';
-import {RestaurantsProps} from '../../types/PropsTypes';
+import {RestaurantsPropsNormalized} from '../../types';
 import { useCallback, useMemo, useState } from 'react';
 import Restaurant from '../restaurant';
 import {connect} from 'react-redux';
-import {State} from '../../store/reducers';
+import {StateType} from '../../store/reducers';
 
-const Restaurants = ({restaurants}: RestaurantsProps) => {
+const Restaurants = ({restaurants}: RestaurantsPropsNormalized) => {
 
     const [
         activeRestaurantId, 
@@ -38,7 +38,7 @@ const Restaurants = ({restaurants}: RestaurantsProps) => {
     )
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: StateType) => ({
     restaurants: state.restaurants,
   })
 

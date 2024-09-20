@@ -1,37 +1,43 @@
 import style from './order.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {AppDispatch}  from '../../store';
-import {State}  from '../../store/reducers';
-import {useCallback, useMemo } from 'react';
+import {AppDispatch, store}  from '../../store';
+import {StateType}  from '../../store/reducers';
+import {useCallback, useMemo, memo, useState, useEffect } from 'react';
 import {CartState} from '../../store/reducers/cart'
-import {RestaurantMenuType} from '../../types';
+import {RestaurantMenuType, dishesInObjectType} from '../../types';
 import {clearTheCart } from '../../store/action-creators';
 import { Button } from "antd";
 import {DecreaseButton, IncreaseButton} from '../cart-buttons';
 
+
+
 const Order = () => {
     const 
-        cartItems = useSelector((state: State) => state.cart),
-        allDishes = useSelector((state: State) => state.dishes);
+        cartItems = useSelector((state: StateType) => state.cart),
+        allDishes = useSelector((state: StateType) => state.dishes);
 
-    interface NormalizeCartItemsType extends RestaurantMenuType {
+    interface DishesInTheCart extends RestaurantMenuType {
         quantity: number;
     }
 
-    const normalizeCartItems = useCallback((
+    const getDishesInTheCart = useCallback((
         cartItems: CartState, 
-        allDishes: Array<RestaurantMenuType>): Array<NormalizeCartItemsType> => {
+        allDishes: dishesInObjectType
+    ): Array<DishesInTheCart> => {
+
         const idAndQuantityArrays: Array<[string, number]> = Object.entries(cartItems);
         return idAndQuantityArrays.map(([itemId, itemQuantity]) => {
-            const dishInTheCart = allDishes.filter(dish => dish.id === itemId)[0];
-            return {...dishInTheCart, quantity: itemQuantity}
-            })
+            // const dishInTheCart = allDishes.filter(dish => dish.id === itemId)[0];
+            // return {...dishInTheCart, quantity: itemQuantity}
+            return {...allDishes[itemId], quantity: itemQuantity}
+            })     
     },[cartItems, allDishes]);
 
-    const normalizedCartItems = useMemo(() => 
-        normalizeCartItems(cartItems, allDishes), [cartItems, allDishes]);
+    const dishesInTheCart = useMemo(() => 
+        getDishesInTheCart(cartItems, allDishes), [cartItems, allDishes]);
+    console.log('Order');
     const fullPrice = useMemo(() => 
-        normalizedCartItems.reduce((sum, current) => sum + current.price * current.quantity, 0), [cartItems]);
+        dishesInTheCart.reduce((sum, current) => sum + current?.price * current?.quantity, 0), [dishesInTheCart]);
 
     const dispatch = useDispatch<AppDispatch>();
     const clearTheOrder = useCallback(() => dispatch(clearTheCart()),[dispatch]);
@@ -46,7 +52,7 @@ const Order = () => {
             >
                 <span>Positions&#160;</span><span>Quantity</span>
             </div>
-            {normalizedCartItems.map(({
+            {dishesInTheCart.map(({
                 id, 
                 name, 
                 quantity
@@ -74,4 +80,4 @@ const Order = () => {
         </div>)
 }
 
-export default Order;
+export default memo(Order);

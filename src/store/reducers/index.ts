@@ -11,4 +11,4 @@ export const reducer = combineReducers({
     dishes: dishesReducer,
 });
 
-export type State = ReturnType<typeof reducer>;
+export type StateType = ReturnType<typeof reducer>;

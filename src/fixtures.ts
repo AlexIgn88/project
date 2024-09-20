@@ -1,7 +1,8 @@
 import {
   RestaurantType,
   NormalizedRestaurantsType,
-  NormalizedDishesType,
+  RestaurantMenuType,
+  // NormalizedDishesType,
   NormalizedReviewsType,
   NormalizedUsersType
 } from '../src/types/fixturesTypes';
@@ -247,7 +248,7 @@ const normalizedRestaurants: Array<NormalizedRestaurantsType> = [
   },
 ]
 
-const normalizedDishes: Array<NormalizedDishesType> = [
+const normalizedDishes: Array<RestaurantMenuType> = [
   {
     id: 'd75f762a-eadd-49be-8918-ed0daa8dd024',
     name: 'Chicken tikka masala',

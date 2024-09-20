@@ -1,12 +1,12 @@
 import Dishes from '../dishes';
-import Reviews from '../../components/reviews';
-import {ActiveRestaurantProps} from '../../types/PropsTypes';
+// import Reviews from '../../components/reviews';
+import {ActiveRestaurantPropsNormalized} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
-import {AverageRating} from '../../components/average-rating';
+// import {AverageRating} from '../../components/average-rating';
 import style from './restaurant.module.css';
 import Order from '../order';
 
-const Restaurant = (props: ActiveRestaurantProps) => {
+const Restaurant = (props: ActiveRestaurantPropsNormalized) => {
     const {restaurant: {name, menu, reviews}} = props;
 
     return (
@@ -23,12 +23,12 @@ const Restaurant = (props: ActiveRestaurantProps) => {
             >
             {name}
             </Typography.Title>
-            <AverageRating reviews={reviews}/>
+            {/* <AverageRating reviews={reviews}/> */}
         </Flex>
         <Order />
-        <Reviews 
+        {/* <Reviews 
         reviews={reviews}
-        />
+        /> */}
         <Dishes 
         menu={menu} 
         />

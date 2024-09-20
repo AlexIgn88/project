@@ -1,26 +1,28 @@
-import {
-    ADD_REVIEW,
-    ADD_TO_CART,
-    DECREMENT,
-    FAIL,
-    FETCH_DISHES,
-    FETCH_RESTAURANTS,
-    FETCH_REVIEWS,
-    FETCH_USERS,
-    INCREMENT,
-    REMOVE_FROM_CART,
-    CLEAR_THE_CART,
-    SEND_ORDER,
-    START,
-    SUCCESS,
-  } from '../common';
+import ActionTypes from '../common';
 //   import {
 //     selectCart,
 //     selectRestaurants,
 //     selectRestaurantsLoaded,
 //   } from '../selectors';
 //   import {push, replace} from 'connected-react-router';
-import {ActionCartReducer} from '../../types/reducerTypes';
+import {ActionCartReducer} from '../../types';
+
+const {
+  ADD_REVIEW,
+  ADD_TO_CART,
+  DECREMENT,
+  FAIL,
+  FETCH_DISHES,
+  FETCH_RESTAURANTS,
+  FETCH_REVIEWS,
+  FETCH_USERS,
+  INCREMENT,
+  REMOVE_FROM_CART,
+  CLEAR_THE_CART,
+  SEND_ORDER,
+  START,
+  SUCCESS,
+} = ActionTypes;
   
   export const increment = () => {
     return {

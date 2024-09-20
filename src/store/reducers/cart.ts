@@ -1,5 +1,7 @@
-import {ActionCartReducer} from '../../types/reducerTypes';
-import {ADD_TO_CART, REMOVE_FROM_CART, CLEAR_THE_CART} from '../common';
+import {ActionCartReducer} from '../../types';
+import ActionTypes from '../common';
+
+const {ADD_TO_CART, REMOVE_FROM_CART, CLEAR_THE_CART} = ActionTypes;
 
 export interface CartState {
     [key: string]: number;

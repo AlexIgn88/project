@@ -1,10 +1,12 @@
-import {restaurants} from '../../fixtures';
-import {RestaurantType} from '../../types/fixturesTypes';
-import {Action} from '../../types/reducerTypes';
-import {ADD_REVIEW, FAIL, FETCH_RESTAURANTS, START, SUCCESS} from '../common';
+import {restaurants, normalizedRestaurants} from '../../fixtures';
+import {RestaurantType, NormalizedRestaurantsType} from '../../types';
+import {Action} from '../../types';
+import ActionTypes from '../common';
+
+const {ADD_REVIEW, FAIL, FETCH_RESTAURANTS, START, SUCCESS} = ActionTypes;
 
 export const restaurantsReducer  = (
-    restaurantsState: Array<RestaurantType> = restaurants, 
+    restaurantsState: Array<NormalizedRestaurantsType> = normalizedRestaurants, 
     action: Action
 ) => {
 

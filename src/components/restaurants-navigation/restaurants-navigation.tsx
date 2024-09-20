@@ -1,10 +1,10 @@
-import {RestaurantsProps} from '../../types/PropsTypes';
+import {RestaurantsProps,RestaurantsPropsNormalized} from '../../types';
 import { Flex, Button } from "antd";
 
 const RestaurantsNavigation = ({
     restaurants, 
     onRestaurantChange
-}: Required<RestaurantsProps>) => {
+}: Required<RestaurantsPropsNormalized>) => {
     return (
         <Flex 
         justify='center'

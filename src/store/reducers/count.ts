@@ -1,5 +1,7 @@
-import {DECREMENT, INCREMENT} from '../common';
+import ActionTypes from '../common';
 import {Action} from '../../types/reducerTypes';
+
+const {INCREMENT, DECREMENT} = ActionTypes;
 
 export const countReducer = (countState: number = 10, action: Action) => {
   switch (action.type) {
