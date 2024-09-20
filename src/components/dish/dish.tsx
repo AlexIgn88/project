@@ -8,6 +8,7 @@ import {addToCart, removeFromCart} from '../../store/action-creators';
 import {State}  from '../../store/reducers';
 import {AppDispatch}  from '../../store';
 // import {ActionCartReducer} from '../../types/reducerTypes';
+import {DecreaseButton, IncreaseButton} from '../cart-buttons';
 
 interface dishProps {
     dish: RestaurantMenuType;
@@ -24,10 +25,6 @@ const Dish = (props: dishProps) => {
         // decrease
     } = props;
 
-    const dispatch = useDispatch<AppDispatch>();
-
-    const increase = useCallback(() => dispatch(addToCart(id)),[dispatch, id]);
-    const decrease = useCallback(() => dispatch(removeFromCart(id)),[dispatch, id]);
     const amount: number = useSelector((state: State) => state.cart[id]) || 0;
 
     return (
@@ -43,21 +40,8 @@ const Dish = (props: dishProps) => {
                 data-testid="AMOUNT">
                 {amount}
                 </div>
-                <Button 
-                onClick={decrease}
-                type='primary'
-                // disabled={amount <= 0}
-                data-testid="DECREASE"
-                >
-                -
-                </Button>
-                <Button 
-                onClick={increase}
-                type='primary'
-                data-testid="INCREASE"
-                >
-                +
-                </Button>
+                <DecreaseButton id={id}/>
+                <IncreaseButton id={id}/>
             </div>
         </Card>
     )

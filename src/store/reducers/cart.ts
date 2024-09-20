@@ -22,11 +22,14 @@ export const cartReducer  = (
             if (!cartState[id]) {
               return cartState
             }
-            return {
-              ...cartState,
-              [id]: cartState[id] - 1,
-            }
+          const updatedCartState = { ...cartState }; 
+          if (updatedCartState[id] === 1) {
+          delete updatedCartState[id]; 
+          } else {
+          updatedCartState[id] -= 1; 
           }
+        return updatedCartState;
+    }
           case CLEAR_THE_CART: {
               return {}
           }

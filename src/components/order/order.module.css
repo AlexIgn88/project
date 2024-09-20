@@ -18,11 +18,20 @@
   
   .cart > div:nth-child(2) > div {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-evenly;
     align-items: center; 
+    gap: 20px;
+  }
+
+  .cart > div:nth-child(2) > div div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
   }
   
-  .cart > div:nth-child(2) > div > span {
+  .cart > div:nth-child(2) > div > div > span {
     font-weight: bold; 
   }
   

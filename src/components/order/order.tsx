@@ -4,9 +4,10 @@ import {AppDispatch}  from '../../store';
 import {State}  from '../../store/reducers';
 import {useCallback, useMemo } from 'react';
 import {CartState} from '../../store/reducers/cart'
-import {RestaurantMenuType} from '../../types/fixturesTypes';
-import {clearTheCart} from '../../store/action-creators';
+import {RestaurantMenuType} from '../../types';
+import {clearTheCart } from '../../store/action-creators';
 import { Button } from "antd";
+import {DecreaseButton, IncreaseButton} from '../cart-buttons';
 
 const Order = () => {
     const 
@@ -45,11 +46,22 @@ const Order = () => {
             >
                 <span>Positions&#160;</span><span>Quantity</span>
             </div>
-            {normalizedCartItems.map((item) => (
+            {normalizedCartItems.map(({
+                id, 
+                name, 
+                quantity
+            }) => (
                 <div
-                key={item.id}
+                key={id}
                 >
-                    <span>{item.name}&#160;</span><span>{item.quantity}</span>
+                    <div>
+                        <span>{name}&#160;</span>
+                        <span>{quantity}</span>
+                    </div>
+                    <div>
+                        <DecreaseButton id={id}/>
+                        <IncreaseButton id={id}/>
+                    </div>
                 </div>)
             )}
         </div>
@@ -57,7 +69,7 @@ const Order = () => {
          <Button 
          onClick={clearTheOrder}
          >
-        Clear the order
+        Сancellation
         </Button>
         </div>)
 }
