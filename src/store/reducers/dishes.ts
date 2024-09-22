@@ -1,5 +1,5 @@
 // import {restaurants} from '../../fixtures';
-import {RestaurantMenuType, dishesInObjectType} from '../../types';
+import {RestaurantMenuType, DishesInObjectType} from '../../types';
 import {Action} from '../../types';
 import {normalizedDishes} from '../../fixtures';
 
@@ -14,7 +14,7 @@ const initialState = normalizedDishes.reduce((dishes, dish) => {
 
 export const dishesReducer = (
     // dishesState: Array<RestaurantMenuType> = normalizedDishes,
-    dishesState: dishesInObjectType = initialState,
+    dishesState: DishesInObjectType = initialState,
     action: Action
 ) => {
 

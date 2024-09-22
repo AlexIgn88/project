@@ -1,13 +1,9 @@
-import {RestaurantMenuType} from '../../types';
-import { Button, Card, Typography } from 'antd';
-import counter from '../../decorators/counter';
-import { useDispatch, useSelector, connect } from 'react-redux';
-import { useCallback } from 'react';
-import {addToCart, removeFromCart} from '../../store/action-creators';
-// import {cartState}  from '../../store/reducers/cart';
+import {NormalizedDishesType} from '../../types';
+import { Card, Typography } from 'antd';
+// import counter from '../../decorators/counter';
+import { useSelector, connect } from 'react-redux';
 import {StateType}  from '../../store/reducers';
 import {AppDispatch}  from '../../store';
-// import {ActionCartReducer} from '../../types/reducerTypes';
 import {DecreaseButton, IncreaseButton} from '../cart-buttons';
 import {selectDish} from '../../store/selectors';
 
@@ -18,28 +14,18 @@ import {selectDish} from '../../store/selectors';
 //     decrease: () => void;
 // }
 
-interface dishPropsNormalized {
+interface DishesOldProps {
     id: string;
-    // dish: RestaurantMenuType | undefined;
-    dish: RestaurantMenuType;
-    // amount: number;
-    // increase: () => void;
-    // decrease: () => void;
 }
 
-const Dish = (props: any) => {
-    const {
-        id,
-        dish: {name, price},
-        // dish: {name, price},
-        // amount,
-        // increase,
-        // decrease
-    } = props;
+interface DishProps {
+    dispatch?: AppDispatch;
+    id: string;
+    dish: NormalizedDishesType; 
+}
 
+const Dish = ({id, dish: {name, price}}: DishProps) => {
     const amount: number = useSelector((state: StateType) => state.cart[id]) || 0;
-    // console.log('Dish');
-
 
     return (
         <Card
@@ -61,11 +47,10 @@ const Dish = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: StateType, ownProps: any) => {
+const mapStateToProps = (state: StateType, ownProps: DishesOldProps) => {
     return {
         dish: selectDish(state, ownProps)
     }
 }
 
-// export default counter(Dish);
 export default connect(mapStateToProps)(Dish);

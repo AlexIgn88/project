@@ -1,1 +1,1 @@
-export * from './average-rating';
+export {default} from './average-rating';

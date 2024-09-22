@@ -1,6 +1,9 @@
-import {ReviewsProps} from '../../types/PropsTypes';
-import Review from '../review/review';
+import Review from '../review';
 import { Flex } from "antd";
+
+interface ReviewsProps {
+    reviews: Array<string>
+}
 
 const Reviews = ({reviews}: ReviewsProps) => {
     return (
@@ -10,10 +13,10 @@ const Reviews = ({reviews}: ReviewsProps) => {
         gap='10px'
         wrap
         >
-            {reviews?.map(review => (
+            {reviews?.map((review: string, index: number) => (
                 <Review 
-                key={review.id}
-                review={review}
+                key={review[index]}
+                id={review}
                 />
             ))
             }

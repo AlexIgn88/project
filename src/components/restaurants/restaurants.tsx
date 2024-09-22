@@ -4,6 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 import Restaurant from '../restaurant';
 import {connect} from 'react-redux';
 import {StateType} from '../../store/reducers';
+import Order from '../order';
+import {selectRestaurants} from '../../store/selectors';
 
 const Restaurants = ({restaurants}: RestaurantsPropsNormalized) => {
 
@@ -32,14 +34,16 @@ const Restaurants = ({restaurants}: RestaurantsPropsNormalized) => {
             {activeRestaurant && (
                 <Restaurant 
             restaurant={activeRestaurant}
-                />
+            >
+                <Order />
+            </Restaurant>
             )}
         </div>
     )
 }
 
 const mapStateToProps = (state: StateType) => ({
-    restaurants: state.restaurants,
+    restaurants: selectRestaurants(state),
   })
 
 export default connect(

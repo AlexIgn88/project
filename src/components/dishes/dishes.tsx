@@ -1,10 +1,13 @@
 import Dish from '../dish';
-import {DishesPropsNormalized} from '../../types/PropsTypes';
 
-const Dishes = ({menu}: DishesPropsNormalized) => {
+interface DishesProps {
+    menu: Array<string>;
+}
+
+const Dishes = ({menu}: DishesProps) => {
     return (
         <div>
-            {menu?.map(dishId => (
+            {menu?.map((dishId: string) => (
                 <Dish 
                 key={dishId} 
                 id={dishId}

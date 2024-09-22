@@ -19,8 +19,16 @@ export interface RestaurantMenuType {
     ingredients: Array<string>;
 }
 
-export interface dishesInObjectType {
+export interface DishesInObjectType {
     [key: string]: RestaurantMenuType;
+}
+
+export interface ReviewsInObjectType {
+    [key: string]: NormalizedReviewsType;
+}
+
+export interface UsersInObjectType {
+    [key: string]: NormalizedUsersType;
 }
 
 export interface RestaurantReviewsType {
@@ -39,18 +47,22 @@ export interface NormalizedRestaurantsType {
     reviews: Array<string>;
 }
 
-// export interface NormalizedDishesType {
-//     id: string;
-//     name: string;
-//     price: number;
-//     ingredients: Array<string>;
-// }
+export interface NormalizedDishesType {
+    id: string;
+    name: string;
+    price: number;
+    ingredients: Array<string>;
+}
 
 export interface NormalizedReviewsType {
     id: string;
     userId: string;
     text: string;
     rating: number;
+}
+
+export interface NormalizedReviewsTypeExtended extends NormalizedReviewsType{
+    userName: string;
 }
 
 export interface NormalizedUsersType {

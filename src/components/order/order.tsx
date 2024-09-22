@@ -4,7 +4,7 @@ import {AppDispatch, store}  from '../../store';
 import {StateType}  from '../../store/reducers';
 import {useCallback, useMemo, memo, useState, useEffect } from 'react';
 import {CartState} from '../../store/reducers/cart'
-import {RestaurantMenuType, dishesInObjectType} from '../../types';
+import {RestaurantMenuType, DishesInObjectType} from '../../types';
 import {clearTheCart } from '../../store/action-creators';
 import { Button } from "antd";
 import {DecreaseButton, IncreaseButton} from '../cart-buttons';
@@ -22,7 +22,7 @@ const Order = () => {
 
     const getDishesInTheCart = useCallback((
         cartItems: CartState, 
-        allDishes: dishesInObjectType
+        allDishes: DishesInObjectType
     ): Array<DishesInTheCart> => {
 
         const idAndQuantityArrays: Array<[string, number]> = Object.entries(cartItems);
@@ -35,7 +35,7 @@ const Order = () => {
 
     const dishesInTheCart = useMemo(() => 
         getDishesInTheCart(cartItems, allDishes), [cartItems, allDishes]);
-    console.log('Order');
+    // console.log('Order');
     const fullPrice = useMemo(() => 
         dishesInTheCart.reduce((sum, current) => sum + current?.price * current?.quantity, 0), [dishesInTheCart]);
 

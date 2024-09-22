@@ -1,24 +1,35 @@
 import { Rate } from "antd";
-import {ReviewsProps} from '../../types/PropsTypes';
-import { useMemo } from 'react';
 import style from './average-rating.module.css';
+import {StateType}  from '../../store/reducers';
+import {selectRestaurantRate} from '../../store/selectors';
+import { connect } from 'react-redux';
+import {AppDispatch} from '../../store/';
 
-export const AverageRating = ({reviews}:ReviewsProps) => {
-    const rateResult: number = useMemo(() => {
-        return reviews.reduce(
-            (sum, {rating}) => sum + rating, 0)
-    }, [reviews]);
+interface AverageRatingOldProps {
+    id: Array<string>;
+}
 
-    const restaurantRate: number = useMemo(() => {
-        return reviews.length > 0 
-        ? Math.floor(rateResult / reviews.length)
-        : 0}, [reviews, rateResult]); 
+interface AverageRatingProps {
+    dispatch: AppDispatch;
+    id: Array<string>;
+    restaurantRate: number | undefined;
+}
+
+const mapStateToProps = (state: StateType, ownProps: AverageRatingOldProps) => {
+    return {
+        restaurantRate: selectRestaurantRate(state, ownProps)
+    }
+}
+
+const AverageRating = (props: AverageRatingProps) => {
     return (
         <Rate 
-        value={restaurantRate}
+        value={props.restaurantRate}
         disabled
         allowHalf
         className={style.stars}
         />
     )
 }
+
+export default connect(mapStateToProps)(AverageRating);

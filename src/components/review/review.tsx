@@ -1,16 +1,26 @@
-import {RestaurantReviewsType} from '../../types/fixturesTypes';
 import { Card, Rate } from "antd";
 import styles from './review.module.css'; 
+import { connect } from 'react-redux';
+import {selectReview} from '../../store/selectors';
+import {StateType}  from '../../store/reducers';
+import {NormalizedReviewsTypeExtended} from '../../types';
+import {AppDispatch} from '../../store/';
 
-interface ReviewProps {
-    review: RestaurantReviewsType;
+interface ReviewOldProps {
+    id: string;
 }
 
-const Review = ({review: {user, rating, text}}: ReviewProps) => {
+interface ReviewProps {
+    dispatch: AppDispatch;
+    id: string;
+    review: NormalizedReviewsTypeExtended;
+}
+
+const Review = ({review: {userName, rating, text}}: ReviewProps) => {
     return (
         <div className={styles.review}>
             <Card 
-              title={user}
+              title={userName}
               data-testid="REVIEW"
             >
                     <Rate 
@@ -25,4 +35,10 @@ const Review = ({review: {user, rating, text}}: ReviewProps) => {
     )
 }
 
-export default Review;
+const mapStateToProps = (state: StateType, ownProps: ReviewOldProps) => {
+    return {
+        review: selectReview(state, ownProps)
+    }
+}
+
+export default connect(mapStateToProps)(Review);

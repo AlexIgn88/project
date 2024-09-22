@@ -1,14 +1,15 @@
 import Dishes from '../dishes';
-// import Reviews from '../../components/reviews';
+import Reviews from '../../components/reviews';
 import {ActiveRestaurantPropsNormalized} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
-// import {AverageRating} from '../../components/average-rating';
+import AverageRating from '../average-rating';
 import style from './restaurant.module.css';
-import Order from '../order';
 
-const Restaurant = (props: ActiveRestaurantPropsNormalized) => {
-    const {restaurant: {name, menu, reviews}} = props;
+interface RestaurantsProps extends ActiveRestaurantPropsNormalized {
+    children: React.ReactElement; 
+  }
 
+const Restaurant = ({restaurant: {name, menu, reviews}, children}: RestaurantsProps) => {
     return (
         <>
         <Flex 
@@ -23,12 +24,12 @@ const Restaurant = (props: ActiveRestaurantPropsNormalized) => {
             >
             {name}
             </Typography.Title>
-            {/* <AverageRating reviews={reviews}/> */}
+            <AverageRating id={reviews}/>
         </Flex>
-        <Order />
-        {/* <Reviews 
+        {children}
+        <Reviews 
         reviews={reviews}
-        /> */}
+        />
         <Dishes 
         menu={menu} 
         />
