@@ -69,3 +69,7 @@ export interface NormalizedUsersType {
     id: string;
     name: string;
 }
+
+export interface DishesInTheCart extends RestaurantMenuType {
+    quantity: number;
+}

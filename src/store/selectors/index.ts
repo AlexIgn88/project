@@ -1,10 +1,21 @@
 import {StateType}  from '../../store/reducers';
 import {createSelector} from '@reduxjs/toolkit';
-// import {useCallback } from 'react';
-import {NormalizedReviewsTypeExtended, NormalizedReviewsType} from '../../types';
-// import {CartState} from '../../store/reducers/cart';
+import 
+    { RestaurantMenuType, 
+     NormalizedReviewsTypeExtended, 
+     NormalizedReviewsType, 
+     DishesInObjectType,
+     ReviewsInObjectType, 
+     UsersInObjectType,
+     DishesInTheCart
+    } from '../../types';
+import {CartState} from '../../store/reducers/cart';
 
-export const selectId = (state: StateType, ownProps: any) => ownProps.id;
+interface OwnProps {
+    id: any;
+}
+
+export const selectId = (_: StateType, ownProps: OwnProps) => ownProps.id;
 export const selectCartItems = (state: StateType) => state.cart;
 export const selectDishes = (state: StateType) => state.dishes;
 export const selectReviews = (state: StateType) => state.reviews;
@@ -20,7 +31,10 @@ export const selectDish = createSelector(
     }
 );
 
-export const selectReview = createSelector(
+export const selectReview: (
+state: StateType, 
+ownProps: OwnProps
+) => NormalizedReviewsTypeExtended = createSelector(
     selectReviews,
     selectUsers,
     selectId,
@@ -47,33 +61,21 @@ export const selectRestaurantRate = createSelector(
     }
 );
 
-// export const selectRestaurantReviews= createSelector(
-//     selectReviews,
-//     selectRestaurants,
-//     (reviews, restaurants) => {
-//         // return dishes.find(dish => dish.id === id)
-//         return reviews[id]
-//     }
-// )
-
-    // export const selectDishesInTheCart = createSelector(selectCartItems, selectAllDishes, (cartItems, allDishes) =>
-    //     getDishesInTheCart(cartItems, allDishes)
-    //   )
+    export const selectDishesInTheCart = createSelector(
+        selectCartItems, 
+        selectDishes, 
+        (cartItems, dishes) =>
+        getDishesInTheCart(cartItems, dishes)
+      );
 
       
-    // export interface DishesInTheCartType extends RestaurantMenuType {
-    //     quantity: number;
-    // }
+    const getDishesInTheCart = (
+        cartItems: CartState, 
+        allDishes: DishesInObjectType
+    ): Array<DishesInTheCart> => {
 
-    // function getDishesInTheCart(
-    //     cartItems: CartState, 
-    //     allDishes: Array<RestaurantMenuType>
-    // ): Array<DishesInTheCartType> {
-
-    //     const idAndQuantityArrays: Array<[string, number]> = Object.entries(cartItems);
-    //     return idAndQuantityArrays.map(([itemId, itemQuantity]) => {
-    //         const dishInTheCart = allDishes.filter(dish => dish.id === itemId)[0];
-    //         return {...dishInTheCart, quantity: itemQuantity}
-    //         })
-            
-    // };
+        const idAndQuantityArrays: Array<[string, number]> = Object.entries(cartItems);
+        return idAndQuantityArrays.map(([itemId, itemQuantity]) => {
+            return {...allDishes[itemId], quantity: itemQuantity}
+            })     
+    }
