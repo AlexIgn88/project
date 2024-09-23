@@ -4,12 +4,13 @@ import {ActiveRestaurantPropsNormalized} from '../../types/PropsTypes';
 import { Flex, Typography  } from "antd";
 import AverageRating from '../average-rating';
 import style from './restaurant.module.css';
+import ReviewForm from '../review-form';
 
 interface RestaurantsProps extends ActiveRestaurantPropsNormalized {
     children: React.ReactElement; 
   }
 
-const Restaurant = ({restaurant: {name, menu, reviews}, children}: RestaurantsProps) => {
+const Restaurant = ({restaurant: {id, name, menu, reviews}, children}: RestaurantsProps) => {
     return (
         <>
         <Flex 
@@ -30,6 +31,15 @@ const Restaurant = ({restaurant: {name, menu, reviews}, children}: RestaurantsPr
         <Reviews 
         reviews={reviews}
         />
+        <Flex
+            justify='center'
+            gap='10px'
+            wrap
+                >
+            <ReviewForm
+                id={id}
+                />
+        </Flex>
         <Dishes 
         menu={menu} 
         />

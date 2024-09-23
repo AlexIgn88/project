@@ -37,6 +37,19 @@ export const reviewsReducer = (
     //     })
     //   )
     // }
+    case ADD_REVIEW: {
+      let newReview = {
+          [action.payload.id]: {
+          id: action.payload.id,
+          userId: action.payload.userId,
+          text: action.payload.text,
+          rating: action.payload.rating,
+         }
+      }
+      return {
+        ...reviewsState, 
+        ...newReview
+    }}
     // case FETCH_REVIEWS + START: {
     //   return reviewsState.set('loading', true)
     // }

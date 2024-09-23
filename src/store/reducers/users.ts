@@ -26,6 +26,15 @@ export const usersReducer = (
     action: Action
 ) => {
     switch (action.type) {
+        case ADD_REVIEW: {
+            return {
+                ...usersState,
+                [action.payload.userId]: {
+                    id: action.payload.userId,
+                    name: action.payload.userName,
+                }
+            } 
+        }
         default:
       return usersState
     }

@@ -7,20 +7,21 @@ interface ReviewsProps {
 
 const Reviews = ({reviews}: ReviewsProps) => {
     return (
+        <>
         <Flex 
         data-testid="REVIEWS"
         justify='center'
         gap='10px'
         wrap
         >
-            {reviews?.map((review: string, index: number) => (
+            {reviews?.map((review: string) => (
                 <Review 
-                key={review[index]}
+                key={review}
                 id={review}
                 />
-            ))
-            }
+            ))}
         </Flex>
+        </>
     )
 }
 

@@ -15,6 +15,10 @@ interface OwnProps {
     id: any;
 }
 
+// interface OwnProps<T extends string | string[]> {
+//     id: T;
+// }
+
 export const selectId = (_: StateType, ownProps: OwnProps) => ownProps.id;
 export const selectCartItems = (state: StateType) => state.cart;
 export const selectDishes = (state: StateType) => state.dishes;
@@ -38,8 +42,8 @@ ownProps: OwnProps
     selectReviews,
     selectUsers,
     selectId,
-    (reviews, users, id) => {
-        const review = reviews[id];
+    (reviews: ReviewsInObjectType, users: UsersInObjectType, id: string) => {
+        const review: NormalizedReviewsType = reviews[id];
         return {
             ...review,
             userName: users[review.userId].name
@@ -50,7 +54,7 @@ ownProps: OwnProps
 export const selectRestaurantRate = createSelector(
     selectReviews,
     selectId,
-    (reviews, idArr) => {
+    (reviews: ReviewsInObjectType, idArr: Array<string>) => {
         const arrayOfReviews: Array<NormalizedReviewsType> = idArr.map((id: string) => reviews[id]);
         if (arrayOfReviews.length === 0 ) return 0
 

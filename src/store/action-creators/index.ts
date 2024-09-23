@@ -60,17 +60,23 @@ const {
     }
   }
   
-//   export const addReview = (userName, rating, text, restaurantId) => ({
-//     type: ADD_REVIEW,
-//     payload: {
-//       userName,
-//       rating,
-//       text,
-//       restaurantId,
-//     },
-//     generateId: true,
-//     provideUserId: true,
-//   })
+  export const addReview = (userName: string, rating: number, text: string, restaurantId: string) => ({
+    type: ADD_REVIEW,
+    payload: {
+      userName,
+      rating,
+      text,
+      restaurantId,
+
+      // id: Date.now() +'',
+      id: true,
+      // userId: Date.now() +'-user',
+      // userId: "20bed9b5-9c7b-4771-8221-75b74ed1904a",
+      userId: true,
+    },
+    // generateId: true,
+    // provideUserId: true,
+  })
   
 //   export const fetchRestaurants = () => ({
 //     type: FETCH_RESTAURANTS,

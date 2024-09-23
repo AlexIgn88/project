@@ -9,6 +9,17 @@ export const restaurantsReducer  = (
     restaurantsState: Array<NormalizedRestaurantsType> = normalizedRestaurants, 
     action: Action
 ) => {
+    switch (action.type) {
+        case ADD_REVIEW: {
+            const {restaurantId, id} = action.payload;
 
-    return restaurantsState
-    };
+            let currentRestaurant = restaurantsState
+            .find(restaurant => restaurant.id === restaurantId)
+
+            currentRestaurant?.reviews.push(id);
+
+            return [...restaurantsState]
+        }
+        default:
+            return  restaurantsState
+    }};
