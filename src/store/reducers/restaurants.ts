@@ -13,12 +13,19 @@ export const restaurantsReducer  = (
         case ADD_REVIEW: {
             const {restaurantId, id} = action.payload;
 
-            let currentRestaurant = restaurantsState
+            const currentRestaurant: NormalizedRestaurantsType | undefined = restaurantsState
             .find(restaurant => restaurant.id === restaurantId)
+            if (!currentRestaurant) return restaurantsState
 
-            currentRestaurant?.reviews.push(id);
-
-            return [...restaurantsState]
+            // currentRestaurant?.reviews.push(id);
+            // return [...restaurantsState]
+            const updatedRestaurant: NormalizedRestaurantsType = {
+                ...currentRestaurant,
+                reviews: [...currentRestaurant?.reviews, id]
+            }
+            return restaurantsState.map(restaurant =>
+                restaurant === currentRestaurant ? updatedRestaurant : restaurant
+            )
         }
         default:
             return  restaurantsState

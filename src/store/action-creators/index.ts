@@ -67,15 +67,11 @@ const {
       rating,
       text,
       restaurantId,
-
-      // id: Date.now() +'',
-      id: true,
-      // userId: Date.now() +'-user',
-      // userId: "20bed9b5-9c7b-4771-8221-75b74ed1904a",
-      userId: true,
+      // id: true,
+      // userId: true,
     },
-    // generateId: true,
-    // provideUserId: true,
+    generateId: true,
+    provideUserId: true,
   })
   
 //   export const fetchRestaurants = () => ({

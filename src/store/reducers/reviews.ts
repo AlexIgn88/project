@@ -19,7 +19,7 @@ export const reviewsReducer = (
 ) => {
   switch (action.type) {
     case ADD_REVIEW: {
-      let newReview = {
+      const newReview = {
         [action.payload.id]: {
           id: action.payload.id,
           userId: action.payload.userId,
