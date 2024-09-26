@@ -6,18 +6,21 @@ var port = 3001
 
 var app = express()
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   next()
 })
 app.use(bodyParser.json())
 app.use('/api', api)
 
-app.listen(port, 'localhost', function(err) {
+var serverAddress = process.env.SERVER_ADDRESS || 'localhost';
+var serverURL = `http://${serverAddress}:${port}`;
+
+app.listen(port, serverAddress, function (err) {
   if (err) {
     console.log(err)
     return
   }
 
-  console.log('Listening at http://localhost:' + port)
+  console.log('Listening at ' + serverURL)
 })
