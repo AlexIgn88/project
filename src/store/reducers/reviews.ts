@@ -3,6 +3,7 @@ import { ReviewsInObjectType } from '../../types';
 import { Action } from '../../types';
 import ActionTypes from '../common';
 import { arrayToMap } from '../utils';
+import { Map } from 'immutable';
 
 const {
   ADD_REVIEW,
@@ -11,26 +12,40 @@ const {
   START, SUCCESS
 } = ActionTypes;
 
-const initialState: ReviewsInObjectType = arrayToMap(normalizedReviews);
+// const initialState: ReviewsInObjectType = arrayToMap(normalizedReviews);
+
+const initialStateMap: any = Map(arrayToMap(normalizedReviews));
+// console.log('initialStateMap.toObject',initialStateMap.toObject());
+// console.log('initialStateMap.toJS',initialStateMap.toJS());
+export type initialStateMapType = typeof initialStateMap;
 
 export const reviewsReducer = (
-  reviewsState: ReviewsInObjectType = initialState,
+  reviewsState: initialStateMapType = initialStateMap,
   action: Action
 ) => {
   switch (action.type) {
     case ADD_REVIEW: {
-      const newReview = {
-        [action.payload.id]: {
+      return reviewsState.set(
+        action.payload.id,
+        {
           id: action.payload.id,
           userId: action.payload.userId,
           text: action.payload.text,
           rating: action.payload.rating,
         }
-      }
-      return {
-        ...reviewsState,
-        ...newReview
-      }
+      )
+      // const newReview = {
+      //   [action.payload.id]: {
+      //     id: action.payload.id,
+      //     userId: action.payload.userId,
+      //     text: action.payload.text,
+      //     rating: action.payload.rating,
+      //   }
+      // }
+      // return {
+      //   ...reviewsState,
+      //   ...newReview
+      // }
     }
     default:
       return reviewsState

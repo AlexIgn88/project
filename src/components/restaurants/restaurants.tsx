@@ -1,24 +1,27 @@
 import RestaurantsNavigation from '../restaurants-navigation';
-import {RestaurantsPropsNormalized} from '../../types';
+import { RestaurantsPropsNormalized, NormalizedRestaurantsType } from '../../types';
 import { useCallback, useMemo, useState } from 'react';
 import Restaurant from '../restaurant';
-import {connect} from 'react-redux';
-import {StateType} from '../../store/reducers';
+import { connect } from 'react-redux';
+import { StateType } from '../../store/reducers';
 import Order from '../order';
-import {selectRestaurants} from '../../store/selectors';
+import { selectRestaurants } from '../../store/selectors';
+import { useSelector } from 'react-redux';
 
-const Restaurants = ({restaurants}: RestaurantsPropsNormalized) => {
+const Restaurants = () => {
+
+    const restaurants: any = useSelector((state: StateType) => selectRestaurants(state));
 
     const [
-        activeRestaurantId, 
+        activeRestaurantId,
         setActiveRestaurantId
     ] = useState('');
 
     const activeRestaurant = useMemo(() => {
         return restaurants.find(
-            restaurant => restaurant.id === activeRestaurantId
+            (restaurant: any) => restaurant.id === activeRestaurantId
         )
-    },[activeRestaurantId, restaurants]);
+    }, [activeRestaurantId, restaurants]);
 
     type HandlerPropsOnRestaurantChange = (id: string) => void;
     const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
@@ -27,25 +30,28 @@ const Restaurants = ({restaurants}: RestaurantsPropsNormalized) => {
 
     return (
         <div data-testid="RESTAURANTS">
-            <RestaurantsNavigation 
-            restaurants={restaurants}
-            onRestaurantChange={handlerPropsOnRestaurantChange}
+            <RestaurantsNavigation
+                restaurants={restaurants}
+                onRestaurantChange={handlerPropsOnRestaurantChange}
             />
             {activeRestaurant && (
-                <Restaurant 
-            restaurant={activeRestaurant}
-            >
-                <Order />
-            </Restaurant>
+                <Restaurant
+                    restaurant={activeRestaurant}
+                >
+                    <Order />
+                </Restaurant>
             )}
         </div>
     )
 }
 
-const mapStateToProps = (state: StateType) => ({
-    restaurants: selectRestaurants(state),
-  })
+// const mapStateToProps = (state: StateType) => ({
+//     restaurants: selectRestaurants(state),
+//   })
 
-export default connect(
-    mapStateToProps
-  )(Restaurants);
+
+// export default connect(
+//     mapStateToProps
+//   )(Restaurants);
+
+export default Restaurants;
