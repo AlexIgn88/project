@@ -2,7 +2,7 @@
 
 ## Description
 
-React, TypeScript, React Testing Library, Redux, Ant Design
+React, TypeScript, React Testing Library, Redux, Ant Design, Node.js
 
 In the project directory, you can run:
 

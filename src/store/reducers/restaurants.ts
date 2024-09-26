@@ -1,6 +1,6 @@
 import { restaurants, normalizedRestaurants } from '../../fixtures';
 import { RestaurantType, NormalizedRestaurantsType } from '../../types';
-import { Action } from '../../types';
+import { ActionRestaurants } from '../../types';
 import ActionTypes from '../common';
 // import { List } from 'immutable';
 // import { fromJS } from 'immutable';
@@ -15,12 +15,12 @@ const {
 
 // const initialStateList = List(normalizedRestaurants);
 
-const initialStateList = normalizedRestaurants;
+const initialStateList: [] = [];
 // export type initialStateListType = typeof initialStateList;
 
 export const restaurantsReducer = (
-    restaurantsState: Array<NormalizedRestaurantsType> = initialStateList,
-    action: Action
+    restaurantsState: Array<NormalizedRestaurantsType> | [] = initialStateList,
+    action: ActionRestaurants
 ) => 
     // {
 //     switch (action.type) {
@@ -59,6 +59,9 @@ export const restaurantsReducer = (
 // };
 produce(restaurantsState, (draft) => {
         switch (action.type) {
+        case FETCH_RESTAURANTS + SUCCESS: {
+            return action.response
+        }
         case ADD_REVIEW: {
             const { restaurantId, id } = action.payload;
             const currentRestaurant: NormalizedRestaurantsType | undefined = draft

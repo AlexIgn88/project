@@ -6,6 +6,8 @@ import ActionTypes from '../common';
 //   } from '../selectors';
 //   import {push, replace} from 'connected-react-router';
 import {ActionCartReducer} from '../../types';
+import { AppDispatch, AppGetState } from '../../store';
+import { selectDishes } from '../selectors';
 
 const {
   ADD_REVIEW,
@@ -67,17 +69,17 @@ const {
       rating,
       text,
       restaurantId,
-      // id: true,
-      // userId: true,
+      // id: '',
+      // userId: '',
     },
     generateId: true,
     provideUserId: true,
   })
   
-//   export const fetchRestaurants = () => ({
-//     type: FETCH_RESTAURANTS,
-//     callAPI: '/api/restaurants',
-//   })
+  export const fetchRestaurants = () => ({
+    type: FETCH_RESTAURANTS,
+    callAPI: '/api/restaurants',
+  })
   
 //   export const fetchUsers = () => ({
 //     type: FETCH_USERS,
@@ -89,25 +91,29 @@ const {
 //     callAPI: '/api/reviews',
 //   })
   
-//   export const fetchDishes = () => (dispatch, getState) => {
-//     dispatch({
-//       type: FETCH_DISHES + START,
-//     })
-//     fetch('/api/dishes')
-//       .then(res => res.json())
-//       .then(res =>
-//         dispatch({
-//           type: FETCH_DISHES + SUCCESS,
-//           response: res,
-//         })
-//       )
-//       .catch(error => {
-//         dispatch({
-//           type: FETCH_DISHES + FAIL,
-//           error,
-//         })
-//       })
-//   }
+  export const fetchDishes = () => (dispatch: AppDispatch, getState: AppGetState) => {
+    if(Object.keys(selectDishes(getState())).length > 0) {
+      return
+    }
+      
+    dispatch({
+      type: FETCH_DISHES + START,
+    })
+    fetch('/api/dishes')
+      .then(res => res.json())
+      .then(res =>
+        dispatch({
+          type: FETCH_DISHES + SUCCESS,
+          response: res,
+        })
+      )
+      .catch(error => {
+        dispatch({
+          type: FETCH_DISHES + FAIL,
+          error,
+        })
+      })
+  }
   
 //   export const sendOrder = details => (dispatch, getState) => {
 //     const state = getState()
