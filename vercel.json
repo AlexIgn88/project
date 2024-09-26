@@ -1,9 +1,1 @@
-{
-    "version": 2,
-    "routes": [
-        {
-            "src": "/api/(.*)",
-            "dest": "simple_api/api/index.js"
-        }
-    ]
-}
+{ "version": 2, "rewrites": [{ "source": "simple_api/(.*)", "destination": "simple_api/api" }] }
