@@ -7,7 +7,7 @@ import ActionTypes from '../common';
 //   import {push, replace} from 'connected-react-router';
 import {ActionCartReducer} from '../../types';
 import { AppDispatch, AppGetState } from '../../store';
-import { selectDishes } from '../selectors';
+import { selectDishes, selectUsers } from '../selectors';
 
 const {
   ADD_REVIEW,
@@ -110,6 +110,30 @@ const {
       .catch(error => {
         dispatch({
           type: FETCH_DISHES + FAIL,
+          error,
+        })
+      })
+  }
+
+  export const fetchUsers = () => (dispatch: AppDispatch, getState: AppGetState) => {
+    if(Object.keys(selectUsers(getState())).length > 0) {
+      return
+    }
+      
+    dispatch({
+      type: FETCH_USERS + START,
+    })
+    fetch('/api/users')
+      .then(res => res.json())
+      .then(res =>
+        dispatch({
+          type: FETCH_USERS + SUCCESS,
+          response: res,
+        })
+      )
+      .catch(error => {
+        dispatch({
+          type: FETCH_USERS + FAIL,
           error,
         })
       })

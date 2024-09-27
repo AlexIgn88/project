@@ -8,9 +8,9 @@ import ReviewForm from '../review-form';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { fetchDishes, fetchReviews } from '../../store/action-creators';
+import { fetchDishes, fetchReviews, fetchUsers } from '../../store/action-creators';
 import { StateType } from '../../store/reducers';
-import { selectDishes, selectReviews } from '../../store/selectors';
+import { selectDishes, selectReviews, selectUsers } from '../../store/selectors';
 import Loader from '../loader';
 
 interface RestaurantsProps extends ActiveRestaurantPropsNormalized {
@@ -24,15 +24,18 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
     useEffect(() => {
         dispatch(fetchDishes());
         dispatch(fetchReviews());
+        dispatch(fetchUsers());
     }, []);
 
     const
         reviewsData = useSelector((state: StateType) => selectReviews(state)),
+        usersData = useSelector((state: StateType) => selectUsers(state)),
+        isUsersData = (Object.keys(usersData).length > 0),
         isReviewsData = (Object.keys(reviewsData).length > 0),
-        reviewsComponent = isReviewsData
+        reviewsComponent = isReviewsData && isUsersData
             ? <Reviews
                 id={id}
-                // reviews={reviews}
+            // reviews={reviews}
             />
             : <Loader />;
 

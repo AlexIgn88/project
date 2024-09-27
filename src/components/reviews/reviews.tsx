@@ -15,7 +15,7 @@ interface ReviewsProps {
 const Reviews = (props: ReviewsProps) => {
 
     const restaurantReviews = useSelector((state: StateType) => selectRestaurantReviews(state, props));
-    console.log('restaurantReviews', restaurantReviews);
+    // console.log('restaurantReviews', restaurantReviews);
 
     // const { reviews } = props;
 
