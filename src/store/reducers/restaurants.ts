@@ -21,60 +21,60 @@ const initialStateList: [] = [];
 export const restaurantsReducer = (
     restaurantsState: Array<NormalizedRestaurantsType> | [] = initialStateList,
     action: ActionRestaurants
-) => 
+) =>
     // {
-//     switch (action.type) {
-//         case ADD_REVIEW: {
-//             const { restaurantId, id } = action.payload;
-//             // const currentRestaurant: NormalizedRestaurantsType | undefined = restaurantsState
-//             // .find(restaurant => restaurant.id === restaurantId)
-//             // if (!currentRestaurant) return restaurantsState
-//             // // currentRestaurant?.reviews.push(id);
-//             // // return [...restaurantsState]
-//             // const updatedRestaurant: NormalizedRestaurantsType = {
-//             //     ...currentRestaurant,
-//             //     reviews: [...currentRestaurant?.reviews, id]
-//             // }
-//             // return restaurantsState.map(restaurant =>
-//             //     restaurant === currentRestaurant ? updatedRestaurant : restaurant
-//             // )
+    //     switch (action.type) {
+    //         case ADD_REVIEW: {
+    //             const { restaurantId, id } = action.payload;
+    //             // const currentRestaurant: NormalizedRestaurantsType | undefined = restaurantsState
+    //             // .find(restaurant => restaurant.id === restaurantId)
+    //             // if (!currentRestaurant) return restaurantsState
+    //             // // currentRestaurant?.reviews.push(id);
+    //             // // return [...restaurantsState]
+    //             // const updatedRestaurant: NormalizedRestaurantsType = {
+    //             //     ...currentRestaurant,
+    //             //     reviews: [...currentRestaurant?.reviews, id]
+    //             // }
+    //             // return restaurantsState.map(restaurant =>
+    //             //     restaurant === currentRestaurant ? updatedRestaurant : restaurant
+    //             // )
 
 
-//             const currentRestaurantIndex = restaurantsState
-//                 .findIndex((restaurant) => restaurant.id === restaurantId);
-//             const currentRestaurant = restaurantsState.get(currentRestaurantIndex);
-//             if (!currentRestaurant) return restaurantsState
-//             return restaurantsState.setIn(
-//                 [currentRestaurantIndex, 'reviews'],
-//                 [...currentRestaurant?.reviews, id]
-//                 // currentRestaurant.get('reviews').push(id)
-//                 // [...currentRestaurant.get('reviews'), id]
-//             )
+    //             const currentRestaurantIndex = restaurantsState
+    //                 .findIndex((restaurant) => restaurant.id === restaurantId);
+    //             const currentRestaurant = restaurantsState.get(currentRestaurantIndex);
+    //             if (!currentRestaurant) return restaurantsState
+    //             return restaurantsState.setIn(
+    //                 [currentRestaurantIndex, 'reviews'],
+    //                 [...currentRestaurant?.reviews, id]
+    //                 // currentRestaurant.get('reviews').push(id)
+    //                 // [...currentRestaurant.get('reviews'), id]
+    //             )
 
 
-//         }
-//         default:
-//             return restaurantsState
-//     }
-// };
-produce(restaurantsState, (draft) => {
+    //         }
+    //         default:
+    //             return restaurantsState
+    //     }
+    // };
+    produce(restaurantsState, (draft) => {
         switch (action.type) {
-        case FETCH_RESTAURANTS + SUCCESS: {
-            return action.response
-        }
-        case ADD_REVIEW: {
-            const { restaurantId, id } = action.payload;
-            const currentRestaurant: NormalizedRestaurantsType | undefined = draft
-            .find(restaurant => restaurant.id === restaurantId)
-            if (!currentRestaurant) return restaurantsState
+            case FETCH_RESTAURANTS + SUCCESS: {
+                return action.response
+            }
+            case ADD_REVIEW: {
+                const { restaurantId, id } = action.payload;
+                const activeRestaurant: NormalizedRestaurantsType | undefined = draft
+                    .find(restaurant => restaurant.id === restaurantId)
+                if (!activeRestaurant) return restaurantsState
 
-            currentRestaurant.reviews.push(id)
-            break 
+                activeRestaurant.reviews.push(id)
+                break
+            }
+            default:
+                return
         }
-        default:
-            return
-    }
-})
+    })
 
 
 

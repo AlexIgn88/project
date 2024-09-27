@@ -8,9 +8,10 @@ import ReviewForm from '../review-form';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { fetchDishes } from '../../store/action-creators';
+import { fetchDishes, fetchReviews } from '../../store/action-creators';
 import { StateType } from '../../store/reducers';
-import { selectDishes } from '../../store/selectors';
+import { selectDishes, selectReviews } from '../../store/selectors';
+import Loader from '../loader';
 
 interface RestaurantsProps extends ActiveRestaurantPropsNormalized {
     children: React.ReactElement;
@@ -21,12 +22,29 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(fetchDishes())
+        dispatch(fetchDishes());
+        dispatch(fetchReviews());
     }, []);
 
-    const dishes = useSelector((state: StateType) => selectDishes(state));
+    const
+        reviewsData = useSelector((state: StateType) => selectReviews(state)),
+        isReviewsData = (Object.keys(reviewsData).length > 0),
+        reviewsComponent = isReviewsData
+            ? <Reviews
+                id={id}
+                // reviews={reviews}
+            />
+            : <Loader />;
 
-    const isDishes = (Object.keys(dishes).length > 0);
+    const
+        dishesData = useSelector((state: StateType) => selectDishes(state)),
+        isDishesData = (Object.keys(dishesData).length > 0),
+        dishesComponent = isDishesData
+            ? <Dishes
+                menu={menu}
+            />
+            : <Loader />;
+
 
     return (
         <>
@@ -42,12 +60,13 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
                 >
                     {name}
                 </Typography.Title>
-                <AverageRating id={reviews} />
+                {isReviewsData &&
+                    <AverageRating
+                        id={reviews}
+                    />}
             </Flex>
             {children}
-            <Reviews
-                reviews={reviews}
-            />
+            {reviewsComponent}
             <Flex
                 justify='center'
                 gap='10px'
@@ -57,19 +76,7 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
                     id={id}
                 />
             </Flex>
-            {!isDishes && (
-                <div style={
-                    {
-                        color: 'red',
-                        fontWeight: 'bold',
-                        fontSize: 'x-large',
-                    }
-                }>
-                    Loading dishes...
-                </div>)}
-            {isDishes && <Dishes
-                menu={menu}
-            />}
+            {dishesComponent}
         </>
     )
 }

@@ -1,15 +1,15 @@
 import { Card, Rate } from "antd";
-import styles from './review.module.css'; 
+import styles from './review.module.css';
 // import { connect } from 'react-redux';
-import {selectReview} from '../../store/selectors';
-import {StateType}  from '../../store/reducers';
-import {NormalizedReviewsTypeExtended} from '../../types';
+import { selectReview } from '../../store/selectors';
+import { StateType } from '../../store/reducers';
+import { NormalizedReviewsTypeExtended } from '../../types';
 // import {AppDispatch} from '../../store/';
 import { useSelector } from "react-redux";
 
-interface ReviewOldProps {
-    id: string;
-}
+// interface ReviewOldProps {
+//     id: string;
+// }
 
 // interface ReviewProps {
 //     dispatch: AppDispatch;
@@ -17,34 +17,38 @@ interface ReviewOldProps {
 //     review: NormalizedReviewsTypeExtended;
 // }
 
-// const Review = ({review: {userName, rating, text}}: ReviewProps) => {
+interface ReviewProps {
+    review: NormalizedReviewsTypeExtended;
+}
 
-const Review = (props: ReviewOldProps) => {
+const Review = ({ review: { userName, rating, text } }: ReviewProps) => {
+
+    // const Review = (props: ReviewProps) => {
     // console.log('props',props);
 
-    const {
-        userName, 
-        rating, 
-        text
-        }: NormalizedReviewsTypeExtended = useSelector(
-        (state: StateType) => selectReview(state, props));
+    // const {
+    //     userName, 
+    //     rating, 
+    //     text
+    //     }: NormalizedReviewsTypeExtended = useSelector(
+    //     (state: StateType) => selectReview(state, props));
 
     // console.log('review',review);
-    
+
     return (
         <div className={styles.review}>
-            <Card 
-              title={userName}
-              data-testid="REVIEW"
+            <Card
+                title={userName}
+                data-testid="REVIEW"
             >
-                    <Rate 
+                <Rate
                     value={rating}
                     disabled
                     allowHalf
-                    />
-                    <div>
-                        {text}
-                    </div>
+                />
+                <div>
+                    {text}
+                </div>
             </Card>
         </div>
     )

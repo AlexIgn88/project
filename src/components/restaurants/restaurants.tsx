@@ -9,6 +9,7 @@ import { selectRestaurants } from '../../store/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { fetchRestaurants } from '../../store/action-creators';
+import Loader from '../loader';
 
 const Restaurants = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -37,16 +38,7 @@ const Restaurants = () => {
 
     return (
         <div data-testid="RESTAURANTS">
-            {(restaurants.length === 0) && (
-                <div style={
-                    {
-                        color: 'red',
-                        fontWeight: 'bold',
-                        fontSize: 'x-large',
-                    }
-                }>
-                    Loading...
-                </div>)}
+            {(restaurants.length === 0) && <Loader />}
             <RestaurantsNavigation
                 restaurants={restaurants}
                 onRestaurantChange={handlerPropsOnRestaurantChange}

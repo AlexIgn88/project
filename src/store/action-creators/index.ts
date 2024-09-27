@@ -86,10 +86,10 @@ const {
 //     callAPI: '/api/users',
 //   })
   
-//   export const fetchReviews = () => ({
-//     type: FETCH_REVIEWS,
-//     callAPI: '/api/reviews',
-//   })
+  export const fetchReviews = () => ({
+    type: FETCH_REVIEWS,
+    callAPI: '/api/reviews',
+  })
   
   export const fetchDishes = () => (dispatch: AppDispatch, getState: AppGetState) => {
     if(Object.keys(selectDishes(getState())).length > 0) {
