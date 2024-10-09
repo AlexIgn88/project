@@ -14,7 +14,11 @@ export default store => next => action => {
         type: action.type + START,
     })
     fetch(callAPI)
-        .then(res => res.json())
+        .then(res =>{ 
+            if (!res.ok) {
+                throw new Error(`Ошибка HTTP: ${res.status}`);
+            }
+            return res.json()})
         .then(res =>
             next({
                 ...rest,

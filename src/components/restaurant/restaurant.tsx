@@ -10,7 +10,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { fetchDishes, fetchReviews, fetchUsers } from '../../store/action-creators';
 import { StateType } from '../../store/reducers';
-import { selectDishes, selectReviews, selectUsers } from '../../store/selectors';
+import { 
+    selectDishes, 
+    selectReviews, 
+    selectReviewsLoading, 
+    selectReviewsLoaded, 
+    selectReviewsError,
+    selectUsers 
+    } from '../../store/selectors';
 import Loader from '../loader';
 
 interface RestaurantsProps extends ActiveRestaurantPropsNormalized {
@@ -28,16 +35,20 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
     }, []);
 
     const
-        reviewsData = useSelector((state: StateType) => selectReviews(state)),
+        // reviewsData = useSelector((state: StateType) => selectReviews(state)),
+        reviewsIsLoading = useSelector((state: StateType) => selectReviewsLoading(state)),
+        reviewsIsLoaded = useSelector((state: StateType) => selectReviewsLoaded(state)),
+        reviewsError = useSelector((state: StateType) => selectReviewsError(state)),
         usersData = useSelector((state: StateType) => selectUsers(state)),
         isUsersData = (Object.keys(usersData).length > 0),
-        isReviewsData = (Object.keys(reviewsData).length > 0),
-        reviewsComponent = isReviewsData && isUsersData
+        // isReviewsData = (Object.keys(reviewsData).length > 0),
+        // reviewsComponent = isReviewsData && isUsersData
+        reviewsComponent = reviewsIsLoaded && isUsersData
             ? <Reviews
                 id={id}
             // reviews={reviews}
             />
-            : <Loader />;
+            : reviewsIsLoading ? <Loader /> : <div style={{textAlign: 'center'}}>{reviewsError}</div>;
 
     const
         dishesData = useSelector((state: StateType) => selectDishes(state)),
@@ -63,7 +74,8 @@ const Restaurant = ({ restaurant: { id, name, menu, reviews }, children }: Resta
                 >
                     {name}
                 </Typography.Title>
-                {isReviewsData &&
+                {/* {isReviewsData && */}
+                {reviewsIsLoaded &&
                     <AverageRating
                         id={reviews}
                     />}

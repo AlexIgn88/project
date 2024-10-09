@@ -24,11 +24,19 @@ export const selectId = (_: StateType, ownProps: OwnProps) => ownProps.id;
 export const selectCartItems = (state: StateType) => state.cart;
 export const selectDishes = (state: StateType) => state.dishes;
 
-export const selectReviews = (state: StateType) => state.reviews;
+// export const selectReviews = (state: StateType) => state.reviews;
 // export const selectReviews = createSelector(
 //     (state: StateType) => state.reviews,
 //     (reviews) => reviews.toObject()
 // );
+// export const selectReviews = createSelector(
+//     (state: StateType) => state.reviews,
+//     (reviewsState) => reviewsState.entities
+// );
+export const selectReviews = (state: StateType) => state.reviews.entities;
+export const selectReviewsLoading = (state: StateType) => state.reviews.loading;
+export const selectReviewsLoaded = (state: StateType) => state.reviews.loaded;
+export const selectReviewsError = (state: StateType) => state.reviews.error;
 
 export const selectUsers = (state: StateType) => state.users;
 
