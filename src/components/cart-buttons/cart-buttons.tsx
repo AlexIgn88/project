@@ -42,21 +42,20 @@ export const IncreaseButton = ({id}: CartButtonProps) => {
         )
         }
 
-
 const CartButton = () => {
-    return (
-        <Button
-        size="large"
-        type="primary"
-        className="cart-button"
-      >
-        <NavLink
-              to='/cart'
-                >
-              <ShoppingCartOutlined />
-        </NavLink>
-      </Button>
-    )
+  return (
+      <NavLink
+            to='/cart'
+              >
+      <Button
+      size="large"
+      type="primary"
+      className="cart-button"
+    >
+      <ShoppingCartOutlined />
+      </Button> 
+      </NavLink>
+  )
 }
 
 export default CartButton;
