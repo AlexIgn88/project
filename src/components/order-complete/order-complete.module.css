@@ -1,0 +1,9 @@
+.completeMessage {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px;
+    font-weight: bold;
+}

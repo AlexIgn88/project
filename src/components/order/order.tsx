@@ -8,11 +8,16 @@ import {
     // RestaurantMenuType, DishesInObjectType, 
     DishesInTheCart} from '../../types';
 import {clearTheCart } from '../../store/action-creators';
-import { Button } from "antd";
-import {DecreaseButton, IncreaseButton} from '../cart-buttons';
+import { Button, Flex } from "antd";
+import CartButton, {DecreaseButton, IncreaseButton} from '../cart-buttons';
 import {selectDishesInTheCart} from '../../store/selectors';
+import { NavLink } from 'react-router-dom';
 
-const Order = () => {
+interface OrderProps {
+    isCart?: boolean;
+}
+
+const Order = ({isCart}: OrderProps) => {
     const dishesInTheCart: Array<DishesInTheCart> = useSelector(
         (state: StateType) => selectDishesInTheCart(state));
 
@@ -53,11 +58,27 @@ const Order = () => {
             )}
         </div>
          <div>Full price: {fullPrice}</div>
-         <Button 
-         onClick={clearTheOrder}
-         >
-        Сancellation
-        </Button>
+         <Flex gap={'10px'}>
+             {!isCart && <CartButton />}
+             <Button 
+                     size="large"
+                     type="primary"
+             onClick={clearTheOrder}
+             >
+                     Сancellation
+                     </Button>
+            {isCart && <Button
+                     size="large"
+                     type="primary"
+                     onClick={clearTheOrder}
+                   >
+                     <NavLink
+                  to='/order-complete'
+                    >
+                  Send order
+                     </NavLink>
+             </Button>}
+         </Flex>
         </div>)
 }
 

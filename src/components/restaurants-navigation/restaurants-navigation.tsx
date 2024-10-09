@@ -1,22 +1,30 @@
 import {RestaurantsProps,RestaurantsPropsNormalized} from '../../types';
 import { Flex, Button } from "antd";
+import styles from './restaurants-navigation.module.css'; 
+import { NavLink, Link } from 'react-router-dom';
 
 const RestaurantsNavigation = ({
     restaurants, 
-    onRestaurantChange
-}: Required<RestaurantsPropsNormalized>) => {
+    // onRestaurantChange
+// }: Required<RestaurantsPropsNormalized>) => {
+}: RestaurantsPropsNormalized) => {
     return (
         <Flex 
         justify='center'
         >
-            {restaurants.map(restaurant => (
-                <Button
-                key={restaurant.id}
-                onClick={() => onRestaurantChange(restaurant.id)}
+            {restaurants.map(({id, name}) => (
+                <NavLink
+                key={id}
+                // onClick={() => onRestaurantChange(restaurant.id)}
+                // href={`/restaurant/${id}`}
+                to={`/restaurant/${id}`}
+                className={({ isActive }) =>
+                    isActive ? styles.active : styles.button
+                  }
                 data-testid="RESTAURANT_NAVIGATION"
                 >
-                    {restaurant.name}
-                </Button>
+                    {name}
+                </NavLink>
             ))}
         </Flex>
     )

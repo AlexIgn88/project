@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import {AppDispatch}  from '../../store';
 import { useCallback } from 'react';
 import {addToCart, removeFromCart} from '../../store/action-creators';
+import { NavLink } from 'react-router-dom';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 interface CartButtonProps {
     id: string;
@@ -14,7 +16,8 @@ export const DecreaseButton = ({id}: CartButtonProps) => {
     return (
         <Button 
         onClick={decrease}
-        // type='primary'
+        type='primary'
+        style={{margin: '5px'}}
         // disabled={amount <= 0}
         data-testid="DECREASE"
         >
@@ -30,7 +33,8 @@ export const IncreaseButton = ({id}: CartButtonProps) => {
     return (
         <Button 
         onClick={increase}
-        // type='primary'
+        type='primary'
+        style={{margin: '5px'}}
         data-testid="INCREASE"
         >
         +
@@ -38,3 +42,21 @@ export const IncreaseButton = ({id}: CartButtonProps) => {
         )
         }
 
+
+const CartButton = () => {
+    return (
+        <Button
+        size="large"
+        type="primary"
+        className="cart-button"
+      >
+        <NavLink
+              to='/cart'
+                >
+              <ShoppingCartOutlined />
+        </NavLink>
+      </Button>
+    )
+}
+
+export default CartButton;

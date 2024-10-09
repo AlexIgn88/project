@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { fetchRestaurants } from '../../store/action-creators';
 import Loader from '../loader';
+import { useParams } from 'react-router-dom';
 
 const Restaurants = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -20,10 +21,15 @@ const Restaurants = () => {
 
     const restaurants: any = useSelector((state: StateType) => selectRestaurants(state));
 
+    const {activeId} = useParams();
+    console.log('activeId=',activeId);
+
     const [
         activeRestaurantId,
         setActiveRestaurantId
     ] = useState('');
+
+    useEffect(() => setActiveRestaurantId(activeId as string),[activeId]);
 
     const activeRestaurant = useMemo(() => {
         return restaurants.find(
@@ -31,25 +37,25 @@ const Restaurants = () => {
         )
     }, [activeRestaurantId, restaurants]);
 
-    type HandlerPropsOnRestaurantChange = (id: string) => void;
-    const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
-        setActiveRestaurantId(id);
-    }, []);
+    // type HandlerPropsOnRestaurantChange = (id: string) => void;
+    // const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
+    //     setActiveRestaurantId(id);
+    // }, []);
 
     return (
         <div data-testid="RESTAURANTS">
             {(restaurants.length === 0) && <Loader />}
             <RestaurantsNavigation
                 restaurants={restaurants}
-                onRestaurantChange={handlerPropsOnRestaurantChange}
+                // onRestaurantChange={handlerPropsOnRestaurantChange}
             />
-            {activeRestaurant && (
-                <Restaurant
-                    restaurant={activeRestaurant}
-                >
-                    <Order />
-                </Restaurant>
-            )}
+                {activeRestaurant && (
+                        <Restaurant
+                            restaurant={activeRestaurant}
+                        >
+                            <Order />
+                        </Restaurant> 
+                )}
         </div>
     )
 }

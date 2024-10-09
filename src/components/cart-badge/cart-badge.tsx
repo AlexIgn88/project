@@ -3,9 +3,9 @@ import {Badge, Button} from 'antd';
 import './cart-badge.css';
 // import {connect} from 'react-redux';
 // import {selectCart} from '../../store/selectors';
-import { ShoppingCartOutlined } from '@ant-design/icons';
 import {useSelector} from 'react-redux';
 import {CartState}  from '../../store/reducers/cart';
+import CartButton from '../cart-buttons';
 
 export default function CartBadge() {
 const amount = useSelector(
@@ -18,12 +18,7 @@ const amount = useSelector(
     count={amount} 
     className={'cart-button-container'}
     >
-      <Button
-        icon={<ShoppingCartOutlined />}
-        size="large"
-        type="primary"
-        className="cart-button"
-      />
+      <CartButton />
     </Badge>
   )
 }
