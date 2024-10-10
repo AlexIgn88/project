@@ -7,11 +7,11 @@ import {useCallback, useMemo, memo, useState, useEffect } from 'react';
 import {
     // RestaurantMenuType, DishesInObjectType, 
     DishesInTheCart} from '../../types';
-import {clearTheCart } from '../../store/action-creators';
+import {clearTheCart, sendOrder } from '../../store/action-creators';
 import { Button, Flex } from "antd";
 import CartButton, {DecreaseButton, IncreaseButton} from '../cart-buttons';
 import {selectDishesInTheCart} from '../../store/selectors';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface OrderProps {
     isCart?: boolean;
@@ -26,7 +26,9 @@ const Order = ({isCart}: OrderProps) => {
     [dishesInTheCart]);
 
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const clearTheOrder = useCallback(() => dispatch(clearTheCart()),[dispatch]);
+    const sendTheOrder = useCallback(() => dispatch(sendOrder('', navigate)),[dispatch]);
     // console.log('Order');
     return (
         <div
@@ -70,13 +72,18 @@ const Order = ({isCart}: OrderProps) => {
             {isCart && <Button
                      size="large"
                      type="primary"
-                     onClick={clearTheOrder}
+                     onClick={
+                        () => {
+                            sendTheOrder();
+                            clearTheOrder();
+                          }
+                    }
                    >
-                     <NavLink
+                     {/* <NavLink
                   to='/order-complete'
-                    >
+                    > */}
                   Send order
-                     </NavLink>
+                     {/* </NavLink> */}
              </Button>}
          </Flex>
         </div>)

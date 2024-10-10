@@ -99,7 +99,8 @@ export const reviewsReducer = (
         loaded: false,
         error: action.error.message,
         entities: draft.entities,
-      }}
+      }
+    }
     // }
     default:
       return reviewsState

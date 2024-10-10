@@ -5,21 +5,23 @@ import Restaurant from '../restaurant';
 // import { connect } from 'react-redux';
 import { StateType } from '../../store/reducers';
 import Order from '../order';
-import { selectRestaurants } from '../../store/selectors';
+import { selectRestaurants, selectRestaurantsLoaded } from '../../store/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
-import { fetchRestaurants } from '../../store/action-creators';
+import { fetchRestaurants, validateRestaurant } from '../../store/action-creators';
 import Loader from '../loader';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Restaurants = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchRestaurants())
     }, []);
 
     const restaurants: any = useSelector((state: StateType) => selectRestaurants(state));
+    const loaded: any = useSelector((state: StateType) => selectRestaurantsLoaded(state));
 
     const {activeId} = useParams();
     console.log('activeId=',activeId);
@@ -41,6 +43,12 @@ const Restaurants = () => {
     // const handlerPropsOnRestaurantChange: HandlerPropsOnRestaurantChange = useCallback((id: string) => {
     //     setActiveRestaurantId(id);
     // }, []);
+
+    useEffect(() => {
+        // console.log('effect');
+            dispatch(validateRestaurant(activeId as string, navigate));
+    }, [loaded, activeId]);
+
 
     return (
         <div data-testid="RESTAURANTS">

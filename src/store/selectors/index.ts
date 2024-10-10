@@ -40,11 +40,15 @@ export const selectReviewsError = (state: StateType) => state.reviews.error;
 
 export const selectUsers = (state: StateType) => state.users;
 
-export const selectRestaurants = (state: StateType) => state.restaurants;
+// export const selectRestaurants = (state: StateType) => state.restaurants;
 // export const selectRestaurants = createSelector(
 //     (state: StateType) => state.restaurants,
 //     (restaurants) => restaurants.toJS()
 // );
+export const selectRestaurants = (state: StateType) => state.restaurants.entities;
+export const selectRestaurantsLoading = (state: StateType) => state.restaurants.loading;
+export const selectRestaurantsLoaded = (state: StateType) => state.restaurants.loaded;
+export const selectRestaurantsError = (state: StateType) => state.restaurants.error;
 
 export const selectRestaurantReviews = createSelector(
     selectReviews,

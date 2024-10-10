@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './app.module.css'; 
 // import Restaurants from '../restaurants';
-import RestaurantsPage from '../routes/restaurants';
-import CartPage from '../routes/cart';
-import OrderCompletePage from '../routes/order-complete';
+import RestaurantsPage from '../../routes/restaurants-page';
+import CartPage from '../../routes/cart-page';
+import OrderCompletePage from '../../routes/order-complete-page';
+import NotFound from '../../routes/404-page';
 import Header from '../header';
 import {store} from '../../store';
 import {Provider} from 'react-redux';
@@ -47,6 +48,11 @@ window.store = store;
                           <Route 
                           path='/order-complete'
                           element={<OrderCompletePage/>}
+                          >
+                          </Route>
+                          <Route 
+                          path='/404'
+                          element={<NotFound/>}
                           >
                           </Route>
                         </Routes>

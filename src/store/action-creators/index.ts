@@ -1,13 +1,13 @@
 import ActionTypes from '../common';
-//   import {
-//     selectCart,
-//     selectRestaurants,
-//     selectRestaurantsLoaded,
-//   } from '../selectors';
-//   import {push, replace} from 'connected-react-router';
 import {ActionCartReducer} from '../../types';
 import { AppDispatch, AppGetState } from '../../store';
-import { selectDishes, selectUsers } from '../selectors';
+import { 
+  selectDishes, 
+  selectUsers, 
+  selectCartItems, 
+  selectRestaurants,
+  selectRestaurantsLoaded 
+} from '../selectors';
 
 const {
   ADD_REVIEW,
@@ -139,27 +139,49 @@ const {
       })
   }
   
-//   export const sendOrder = details => (dispatch, getState) => {
-//     const state = getState()
-//     const dishes = selectCart(state)
-//     dispatch({
-//       type: SEND_ORDER,
-//       payload: {
-//         cart: dishes,
-//         ...details,
-//       },
-//     })
-//     dispatch(push('/order-complete'))
-//   }
+    export const sendOrder = (details: any, navigate: any) => (dispatch: AppDispatch, getState: AppGetState) => {
+    const state = getState();
+    const cartItems = selectCartItems(state);
+    dispatch({
+      type: SEND_ORDER,
+      payload: {
+        cart: cartItems,
+        ...details,
+      },
+    })
+    navigate('/order-complete'); 
+  }
   
-//   export const validateRestaurant = id => (dispatch, getState) => {
-//     const restaurant = selectRestaurants(getState()).find(
-//       restaurant => restaurant.id === id
-//     )
+  export const validateRestaurant = (id: string, navigate: any) => (dispatch: AppDispatch, getState: AppGetState) => {
+    // const restaurant = selectRestaurants(getState()).find(
+    //   restaurant => restaurant.id === id
+    // )
   
-//     const loaded = selectRestaurantsLoaded(getState())
+    // const loaded = selectRestaurantsLoaded(getState())
+
+    // dispatch({
+    //   type: 'VALIDATE_RESTAURANT',
+    // })
   
-//     if (loaded && !restaurant) {
-//       dispatch(replace('/404'))
-//     }
-//   }
+    // if (loaded && !restaurant) {
+    //   // dispatch(replace('/404'))
+    //   navigate('/404'); 
+    // }
+
+    const loaded = selectRestaurantsLoaded(getState());
+    // console.log('loaded',loaded);
+    if (!loaded) return
+    if (!id) return
+
+    // console.log('navigate',navigate);
+
+    dispatch({
+      type: 'VALIDATE_RESTAURANT',
+    })
+
+    const restaurant = selectRestaurants(getState()).find(
+      restaurant => restaurant.id === id
+    );
+  
+    if (!restaurant) navigate('/404');
+  }
