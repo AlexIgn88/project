@@ -1,4 +1,4 @@
-import Restaurants from '../components/restaurants';
+import Restaurants from "../components/restaurants";
 
-const RestaurantsPage = () => <Restaurants/>
+const RestaurantsPage = () => <Restaurants />;
 export default RestaurantsPage;

@@ -1,4 +1,4 @@
-import OrderComplete from '../components/order-complete';
+import OrderComplete from "../components/order-complete";
 
-const OrderCompletePage = () => <OrderComplete />
+const OrderCompletePage = () => <OrderComplete />;
 export default OrderCompletePage;

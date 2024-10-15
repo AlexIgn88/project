@@ -153,28 +153,9 @@ const {
   }
   
   export const validateRestaurant = (id: string, navigate: any) => (dispatch: AppDispatch, getState: AppGetState) => {
-    // const restaurant = selectRestaurants(getState()).find(
-    //   restaurant => restaurant.id === id
-    // )
-  
-    // const loaded = selectRestaurantsLoaded(getState())
-
-    // dispatch({
-    //   type: 'VALIDATE_RESTAURANT',
-    // })
-  
-    // if (loaded && !restaurant) {
-    //   // dispatch(replace('/404'))
-    //   navigate('/404'); 
-    // }
-
     const loaded = selectRestaurantsLoaded(getState());
-    // console.log('loaded',loaded);
     if (!loaded) return
     if (!id) return
-
-    // console.log('navigate',navigate);
-
     dispatch({
       type: 'VALIDATE_RESTAURANT',
     })

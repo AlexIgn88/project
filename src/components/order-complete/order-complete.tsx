@@ -1,10 +1,9 @@
-import styles from './order-complete.module.css';
+import styles from "./order-complete.module.css";
 
 const OrderComplete = () => (
-<div 
- className={styles.completeMessage}
- >
+  <div className={styles.completeMessage}>
     Your order is completed! Thank you!
-</div>)
+  </div>
+);
 
 export default OrderComplete;

@@ -1,8 +1,6 @@
 import { StateType } from '../../store/reducers';
 import { createSelector } from '@reduxjs/toolkit';
 import {
-    RestaurantMenuType,
-    NormalizedRestaurantsType,
     NormalizedReviewsTypeExtended,
     NormalizedReviewsType,
     DishesInObjectType,
@@ -33,7 +31,7 @@ export const selectDishes = (state: StateType) => state.dishes;
 //     (state: StateType) => state.reviews,
 //     (reviewsState) => reviewsState.entities
 // );
-export const selectReviews = (state: StateType) => state.reviews.entities;
+export const selectReviews: (state: StateType) => ReviewsInObjectType | {} = (state: StateType) => state.reviews.entities;
 export const selectReviewsLoading = (state: StateType) => state.reviews.loading;
 export const selectReviewsLoaded = (state: StateType) => state.reviews.loaded;
 export const selectReviewsError = (state: StateType) => state.reviews.error;
@@ -72,11 +70,10 @@ export const selectDish = createSelector(
     selectDishes,
     selectId,
     (dishes, id) => {
-        // return dishes.find(dish => dish.id === id)
         return dishes[id]
     }
 );
-// NormalizedReviewsTypeExtended
+
 export const selectReview: (
     state: StateType,
     ownProps: OwnProps
