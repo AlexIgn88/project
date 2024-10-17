@@ -1,4 +1,10 @@
 import Order from "../components/order";
 
-const CartPage = () => <Order isCart />;
+interface CartPageProps {
+  handleUserChange: (userName: string) => void;
+}
+
+const CartPage = ({ handleUserChange }: CartPageProps) => (
+  <Order isCart handleUserChange={handleUserChange} />
+);
 export default CartPage;

@@ -1,5 +1,4 @@
 .button {
-  position: absolute;
-  right: 80px;
   color: white;
+  margin-right: 30px;
 }

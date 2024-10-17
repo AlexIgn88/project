@@ -1,19 +1,14 @@
-import React from "react";
 import Logo from "./logo";
 import styles from "./header.module.css";
-// import LangSelect from '../lang-select';
-import CartBadge from "../cart-badge";
-import HomeButton from "../home-button";
+import LanguageBar from "../language-bar";
+import NavButtons from "../nav-buttons";
 
-// @ts-ignore
-// function Header({lang, setLang}) {
 function Header() {
   return (
     <header className={styles.header}>
+      <LanguageBar />
       <Logo />
-      <HomeButton />
-      {/* <LangSelect currentLang={lang} setLang={setLang} /> */}
-      <CartBadge />
+      <NavButtons />
     </header>
   );
 }

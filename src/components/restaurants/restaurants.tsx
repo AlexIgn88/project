@@ -33,7 +33,7 @@ const Restaurants = () => {
   );
 
   const { activeId } = useParams();
-  console.log("activeId=", activeId);
+  // console.log("activeId=", activeId);
 
   const [activeRestaurantId, setActiveRestaurantId] = useState("");
 

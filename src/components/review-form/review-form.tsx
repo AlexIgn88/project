@@ -4,6 +4,10 @@ import useInput from "../../custom-hooks/use-input";
 import styles from "./review-form.module.css";
 import { useDispatch } from "react-redux";
 import { addReview } from "../../store/action-creators";
+import {
+  useLanguageObject,
+  getTextInLang,
+} from "../../custom-hooks/use-text-in-lang";
 
 const ReviewForm = ({ id }: any) => {
   const [rating, setRating] = useState(0);
@@ -27,18 +31,23 @@ const ReviewForm = ({ id }: any) => {
     handleTextChange = setText,
     handleRatingChange = setRating;
 
+  const currentLanguageObject = useLanguageObject();
+
   return (
     <Card className={styles.reviewForm}>
       <Row align="middle">
         <Col xs={24} md={18}>
           <Typography.Title className={styles.addReviewTitle} level={4}>
-            Leave your review
+            {getTextInLang("Leave your review", currentLanguageObject)}
           </Typography.Title>
           <Form form={form} onFinish={handleSubmit}>
             <Input
               value={name}
               onChange={handleNameChange}
-              placeholder={"User name"}
+              placeholder={getTextInLang(
+                "Enter your name",
+                currentLanguageObject,
+              )}
               className={!isValidName ? styles.invalid : ""}
             />
             <Input.TextArea
@@ -49,11 +58,11 @@ const ReviewForm = ({ id }: any) => {
               className={!isValidText ? styles.invalid : ""}
             />
             <div>
-              Rating
+              {getTextInLang("Rating", currentLanguageObject)}
               <Rate value={rating} onChange={handleRatingChange} />
             </div>
             <Button htmlType="submit" className={styles.submitButton}>
-              Send review
+              {getTextInLang("Send review", currentLanguageObject)}
             </Button>
           </Form>
         </Col>

@@ -5,6 +5,10 @@ import { StateType } from "../../store/reducers";
 import { AppDispatch } from "../../store";
 import { DecreaseButton, IncreaseButton } from "../cart-buttons";
 import { selectDish } from "../../store/selectors";
+import {
+  useLanguageObject,
+  getTextInLang,
+} from "../../custom-hooks/use-text-in-lang";
 
 interface DishesOldProps {
   id: string;
@@ -18,10 +22,12 @@ interface DishProps {
 
 const Dish = ({ id, dish: { name, price } }: DishProps) => {
   const amount: number = useSelector((state: StateType) => state.cart[id]) || 0;
-
+  const currentLanguageObject = useLanguageObject();
   return (
     <Card title={name} data-testid="DISH">
-      <Typography.Paragraph>Price: {price}</Typography.Paragraph>
+      <Typography.Paragraph>
+        {getTextInLang("Price", currentLanguageObject)}: {price}
+      </Typography.Paragraph>
       <div>
         <div data-testid="AMOUNT">{amount}</div>
         <DecreaseButton id={id} />

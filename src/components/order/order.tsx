@@ -2,19 +2,25 @@ import style from "./order.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { StateType } from "../../store/reducers";
-import { useCallback, useMemo, memo, useState, useEffect } from "react";
+import { useCallback, useMemo, memo, useState } from "react";
 import { DishesInTheCart } from "../../types";
 import { clearTheCart, sendOrder } from "../../store/action-creators";
 import { Button, Flex } from "antd";
-import CartButton, { DecreaseButton, IncreaseButton } from "../cart-buttons";
+import { DecreaseButton, IncreaseButton } from "../cart-buttons";
 import { selectDishesInTheCart } from "../../store/selectors";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import GetTextInLang from "../get-text-in-lang";
+import {
+  useLanguageObject,
+  getTextInLang,
+} from "../../custom-hooks/use-text-in-lang";
 
 interface OrderProps {
   isCart?: boolean;
+  handleUserChange?: (userName: string) => void;
 }
 
-const Order = ({ isCart }: OrderProps) => {
+const Order = ({ isCart, handleUserChange }: OrderProps) => {
   const dishesInTheCart: Array<DishesInTheCart> = useSelector(
     (state: StateType) => selectDishesInTheCart(state),
   );
@@ -35,13 +41,38 @@ const Order = ({ isCart }: OrderProps) => {
     () => dispatch(sendOrder("", navigate)),
     [dispatch],
   );
+
+  const [userNameData, setUserNameData] = useState({
+    userName: "",
+  });
+
+  const handleUserNameInputChange = (value: string) => {
+    setUserNameData({
+      userName: value,
+    });
+  };
+
+  const handleCancellation = () => {
+    handleUserNameInputChange("");
+    clearTheOrder();
+  };
+
+  const currentLanguageObject = useLanguageObject();
+
   return (
     <div className={style.cart}>
-      <div>Your order</div>
+      <div>
+        <GetTextInLang text="Your order" />
+      </div>
       <div>
         <div>
-          <span>Positions&#160;</span>
-          <span>Quantity</span>
+          <span>
+            <GetTextInLang text="Positions" />
+            &#160;
+          </span>
+          <span>
+            <GetTextInLang text="Quantity" />
+          </span>
         </div>
         {dishesInTheCart.map(({ id, name, quantity }) => (
           <div key={id}>
@@ -56,23 +87,35 @@ const Order = ({ isCart }: OrderProps) => {
           </div>
         ))}
       </div>
-      <div>Full price: {fullPrice}</div>
+      <div>
+        <GetTextInLang text="Full price" />: {fullPrice}
+      </div>
       <Flex gap={"10px"}>
-        {!isCart && <CartButton />}
-        <Button size="large" type="primary" onClick={clearTheOrder}>
-          Сancellation
-        </Button>
         {isCart && (
-          <Button
-            size="large"
-            type="primary"
-            onClick={() => {
-              sendTheOrder();
-              clearTheOrder();
-            }}
-          >
-            Send order
-          </Button>
+          <>
+            <Button size="large" type="primary" onClick={handleCancellation}>
+              <GetTextInLang text="Сancellation" />
+            </Button>
+            <input
+              placeholder={getTextInLang(
+                "Enter your name",
+                currentLanguageObject,
+              )}
+              value={userNameData.userName}
+              onChange={(evt) => handleUserNameInputChange(evt.target.value)}
+            ></input>
+            <Button
+              size="large"
+              type="primary"
+              onClick={() => {
+                if (handleUserChange) handleUserChange(userNameData.userName);
+                sendTheOrder();
+                clearTheOrder();
+              }}
+            >
+              <GetTextInLang text="Send order" />
+            </Button>
+          </>
         )}
       </Flex>
     </div>

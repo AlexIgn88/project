@@ -1,5 +1,4 @@
-import React from "react";
-import { Badge, Button } from "antd";
+import { Badge } from "antd";
 import "./cart-badge.css";
 import { useSelector } from "react-redux";
 import { CartState } from "../../store/reducers/cart";
