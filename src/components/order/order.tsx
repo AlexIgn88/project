@@ -10,10 +10,8 @@ import { DecreaseButton, IncreaseButton } from "../cart-buttons";
 import { selectDishesInTheCart } from "../../store/selectors";
 import { useNavigate } from "react-router-dom";
 import GetTextInLang from "../get-text-in-lang";
-import {
-  useLanguageObject,
-  getTextInLang,
-} from "../../custom-hooks/use-text-in-lang";
+import { useLanguageObject } from "../../custom-hooks/use-language-object";
+import { getTextInLang } from "../../utils/getTextInLang";
 
 interface OrderProps {
   isCart?: boolean;
@@ -39,7 +37,7 @@ const Order = ({ isCart, handleUserChange }: OrderProps) => {
   const clearTheOrder = useCallback(() => dispatch(clearTheCart()), [dispatch]);
   const sendTheOrder = useCallback(
     () => dispatch(sendOrder("", navigate)),
-    [dispatch],
+    [dispatch, navigate],
   );
 
   const [userNameData, setUserNameData] = useState({

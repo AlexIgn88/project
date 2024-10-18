@@ -1,9 +1,7 @@
 import styles from "./order-complete.module.css";
 import { Consumer as UserConsumer } from "../../contexts/user";
-import {
-  useLanguageObject,
-  getTextInLang,
-} from "../../custom-hooks/use-text-in-lang";
+import { useLanguageObject } from "../../custom-hooks/use-language-object";
+import { getTextInLang } from "../../utils/getTextInLang";
 
 const OrderComplete = () => {
   const currentLanguageObject = useLanguageObject();

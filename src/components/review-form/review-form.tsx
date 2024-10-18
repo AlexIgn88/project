@@ -4,10 +4,8 @@ import useInput from "../../custom-hooks/use-input";
 import styles from "./review-form.module.css";
 import { useDispatch } from "react-redux";
 import { addReview } from "../../store/action-creators";
-import {
-  useLanguageObject,
-  getTextInLang,
-} from "../../custom-hooks/use-text-in-lang";
+import { useLanguageObject } from "../../custom-hooks/use-language-object";
+import { getTextInLang } from "../../utils/getTextInLang";
 
 const ReviewForm = ({ id }: any) => {
   const [rating, setRating] = useState(0);

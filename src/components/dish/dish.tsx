@@ -5,10 +5,8 @@ import { StateType } from "../../store/reducers";
 import { AppDispatch } from "../../store";
 import { DecreaseButton, IncreaseButton } from "../cart-buttons";
 import { selectDish } from "../../store/selectors";
-import {
-  useLanguageObject,
-  getTextInLang,
-} from "../../custom-hooks/use-text-in-lang";
+import { useLanguageObject } from "../../custom-hooks/use-language-object";
+import { getTextInLang } from "../../utils/getTextInLang";
 
 interface DishesOldProps {
   id: string;
