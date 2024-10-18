@@ -36,6 +36,7 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"npm run api\"",
+    "commit": "cz",
     "api": "node simple_api/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

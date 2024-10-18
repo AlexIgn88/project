@@ -14,7 +14,7 @@ import {
 } from "../../contexts/user";
 import { LanguageContextProvider } from "../../contexts/language";
 
-// only for experimenting:
+// only for experimenting
 declare global {
   interface Window {
     store: any;
