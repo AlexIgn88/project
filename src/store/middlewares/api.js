@@ -2,7 +2,7 @@ import ActionTypes from "../common";
 
 const { START, SUCCESS, FAIL } = ActionTypes;
 
-export default (store) => (next) => (action) => {
+const api = (store) => (next) => (action) => {
   const { callAPI, ...rest } = action;
 
   if (!callAPI) {
@@ -35,3 +35,5 @@ export default (store) => (next) => (action) => {
       });
     });
 };
+
+export default api;
